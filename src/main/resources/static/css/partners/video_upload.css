@@ -1,0 +1,465 @@
+.auto_canvas{border:5px solid white;opacity:0.4;position: absolute;z-index: 8999;cursor:pointer;}
+.auto_canvas .mini_box{top:0;right:0;width:100px;height:30px;background: black;text-align: center;color: white;position: absolute;}
+#auto_canvas_box{width: 100%;overflow: hidden;height: 65%;position: absolute;}
+.auto_canvas:hover{background:black;opacity: 0.2;}
+.sta_list{float:left;}
+.sta_list .sta{width:33.3%;float:left;margin-top:20px;}
+#profile .box div.icon{width:20%;float:left;margin-right:10px;}
+#follow_count,#total_count,#log_out{width:80%;float:left;}
+.product_name{text-overflow:ellipsis; overflow:hidden;white-space:nowrap;width: 150px;}
+.img-sm{width:60px;height:60px;}
+@media (min-width: 1200px) {
+    .vertical-timeline-wrapper {
+        float: left;
+        width: 50%;
+    }
+}
+@media (min-width: 350px) and (max-width: 1199px) {
+    #box_title {
+        width: 90%;
+        clear: both;
+        margin-left: 20px;
+    }
+
+
+    .searchPop {
+        width: 100%;
+        height: 100%;
+    }
+
+    #padding_box {
+        height: 250px;
+        width: 100%;
+    }
+
+}
+
+
+@media (min-width:1200px) {
+
+    .searchPop {
+        width: 500px;
+        height: 90%;
+        top: calc(12% - 99px);
+        left: calc(50% - 225px);
+    }
+}
+
+
+
+.box_list {
+    width: 100%;
+    margin-top: 40px;
+    float: left;
+}
+
+.box_list .box {
+    width: 100%;
+    float: left;
+    margin-top: 35px;
+}
+
+.box_list .box .title {
+    color: #4e4e4e;
+}
+
+.box_list.product_table {
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+}
+
+.dropzone .dz-message {
+    text-align: center;
+}
+
+.progress-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px;
+}
+
+.progress-outer {
+    background: #fff;
+    padding: 5px 60px 5px 5px;
+    border: 5px solid #bebfbf;
+    border-radius: 45px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress {
+    background: #bebfbf;
+    border-radius: 20px;
+    margin: 0;
+}
+
+.progress .progress-bar {
+    border-radius: 20px;
+    box-shadow: none;
+    animation: animate-positive 2s;
+}
+
+.progress .progress-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #6b7880;
+    position: absolute;
+    top: 3px;
+    right: 10px;
+}
+
+@keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg); transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.file-upload label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+.file-upload input[type="file"] {
+    /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.file-upload label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+/* named upload */
+.file-upload .upload-name {
+    display: inline-block;
+    padding: .5em .75em;
+    /* label의 패딩값과 일치 */
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    -webkit-appearance: none;
+    /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* imaged preview */
+.file-upload .upload-display {
+    /* 이미지가 표시될 지역 */
+    margin-bottom: 5px;
+}
+
+@media(min-width: 768px) {
+    .file-upload .upload-display {
+        display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+}
+
+.file-upload .upload-thumb-wrap {
+    /* 추가될 이미지를 감싸는 요소 */
+    display: inline-block;
+    width: 54px;
+    padding: 2px;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.file-upload .upload-display img {
+    /* 추가될 이미지 */
+    display: block;
+    max-width: 100%;
+    width: 100% \9;
+    height: auto;
+}
+
+.product_box {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 4px solid red;
+    opacity: 0.6;
+    z-index: 999;
+    top: 100px;
+    left: 351px;
+}
+
+.blackScreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.4;
+    z-index: 9990;
+    width: 100%;
+}
+
+.searchPop {
+    box-sizing: border-box;
+    padding: 30px;
+    display: block;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    background: white;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.timeBtn {
+    padding: 10px 52px;
+    border-radius: 10px;
+    border: none;
+    border: 2px solid #e70012;
+    color: #e70012;
+    float: left;
+}
+
+
+.video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video iframe, .video object, .video embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.plyr.video {
+    z-index: 555;
+}
+
+.go_btn {
+    border: none;
+    float: right;
+    padding: 6px 61px;
+    font-size: 20px;
+    border-radius: 4px;
+    margin-right: 20px;
+    color: white;
+    background: #e70012;
+}
+
+#canvas {
+
+    border: 10px solid transparent;
+}
+
+.rectangle {
+    border: 1px solid #FF0000;
+    position: absolute;
+}
+
+
+
+.actions {
+    margin-top:30px;
+    margin-bottom:30px;
+    float:right;
+}
+
+#getTime .start,#getTime .end{
+    width:25%;
+    float:left;
+}
+
+#getTime #startTime,#getTime #endTime{
+    width:25%;
+    float:left;
+    height:50px;
+}
+#getTime .js-start, #getTime .js-end{
+    width:100%;
+
+}
+#getTime .js-end{
+    clear:both;
+}
+
+#getTime .js-timeBtn{
+    float:right;
+}
+
+#getSelect,#getSelect2{
+    width: 100%;
+    text-align: right;
+}
+
+#getSelect .auto,#getSelect2 .cancel{
+    float:right;
+}
+
+#loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    z-index: 9999;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+
+}
+
+.blackScreen.loading {
+    display: none;
+    height: 100%;
+    position: fixed;
+}
+
+.blackScreen.loadingp .loading {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 라디오 버튼 */
+input[type=radio] {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+}
+
+input[type=radio]+label {
+    margin: 0;
+    padding: .75em 1.5em;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    border: solid 1px #696ffb;
+    background-color: #FFF;
+    line-height: 140%;
+    color: #696ffb;
+    text-align: center;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out;
+    cursor: pointer;
+}
+
+input[type=radio]:checked+label {
+    background-color: #696ffb;
+    color: white;
+    border: none;
+    box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+    z-index: 1;
+}
+
+
+
+#video_dropzone_btn{width: 100%;height: 300px;border: none}
+.product_info_title{width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.timeline_box{float: right;margin-top: 10px;}
+.show_time{text-align: right;}
+.ui-slider-range{background:#696ffb;}
+.slider-range{background: #e2e2e2;border: none;}
+
+#p_info_list .p_info .image_box{width:30%;float:left;}
+#p_info_list .p_info .product{width:50%;float:left;padding-right: 10px;box-sizing: border-box;color:black;}
+#p_info_list .p_info .chk_box{width:20%;float:left;padding-top: 20px;}
+
+
+.searchBar{width: 100%;padding: 15px;box-sizing: border-box;text-align: center;}
+.searchBar .input_div{width: 70%;float: left;}
+.searchBar .input_div #product_name{width: 100%;height: 44px;}
+.searchBar .btn_div{width: 30%;float: left;padding-left: 20px;box-sizing: border-box;}
+.keyword_show{text-align: center;margin-top: 80px;margin-bottom: 30px;}
+
+.modal-body{overflow-x: hidden;height:500px;}
+
+#final_btn{margin-top:20px;float:right;width: 100%;}
+
+#none_product td{text-align: center;padding-top: 30px;font-weight: bold;}
+#p_title{padding-top: 20px;color: #696ffb;font-weight: 600;}

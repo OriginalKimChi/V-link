@@ -1,0 +1,261 @@
+<head>
+    <th:block th:include="/header2"></th:block>
+    <link rel="stylesheet" href="./css/partners/video_upload.css" />
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+
+    <!-- cookie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/shared/style.css">
+
+    <!-- prettytag -->
+    <script src="./js/prettytag.js"></script>
+    <link rel="stylesheet" href="./css/prettytag.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+</head>
+<div class="page-content-wrapper">
+    <!-- 영상 로딩 -->
+    <div class="blackScreen"></div>
+    <div id="upload_loading" class="blackScreen loadingP" style="height:100%;">
+        <div id="loading"></div>
+    </div>
+
+    <!-- 상품 검색 팝업 -->
+    <div style="padding-right: 17px;" class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">상품 검색</h5>
+                    <button type="button" class="close" onclick="closePop()"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="searchBar">
+                        <div class="input_div">
+                            <input id="product_name" type="text" value="" placeholder="상품명을 입력하세요" class="form-control" />
+                        </div>
+                        <div class="btn_div">
+                            <button id="search_product_btn" onclick="searchBtn()" class="btn btn-primary">검색</button>
+                        </div>
+                    </div>
+                    <div class="keyword_show">
+                        <span id="keyword_box" style="display: none;"><b style="color:#696ffb;">"<span id="s_keyword"></span>"</b>의 결과입니다.</span>
+                    </div>
+                    <div id="p_info_list">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePop()">Close</button><button type="button" class="btn btn-primary" onclick="selectProduct()">선택</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content-wrapper-inner">
+        <div class="content-viewport">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 equel-grid">
+                    <div class="grid widget-revenue-card">
+                        <div class="grid-body d-flex flex-column h-100">
+                            <div class="split-header">
+                                <p class="card-title">비디오 업로드</p>
+                            </div>
+                            <div class="container">
+                                <div class="contents">
+                                    <div>
+                                        <div id="dropzone" class="dropzone_box2">
+                                            <form action="/video/upload" class="dropzone" id="demo-upload">
+                                                <div class="dz-message" styfffle="margin-top:40px;">
+                                                    <button type="button" id="video_dropzone_btn" class="dz-button">Drop your video here</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div id="drop_after" style="display:none;">
+                                        <div class="video_box" style="position:relative;float:left;width:100%;">
+                                            <canvas id="c" width=300 height=500 style="position:absolute;top:0;left:0;z-index:0;border:3px solid yellow;"></canvas>
+                                            <video style="z-index:555;position:absolute;left:0;top:0;" controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+                                                <!-- Video files -->
+                                            </video>
+
+                                            <div class="actions" style="margin-top:30px;margin-bottom:30px;float:right;">
+                                                <button type="button" class="js-play btn btn-primary w-33 ml-2">시작</button>
+                                                <button type="button" class="js-complete btn btn-primary w-33 ml-2" onclick="showPop()">완료</button>
+                                            </div>
+                                            <div class="status_btn">
+                                                <div class="actions getTime" id="getTime" style="display:none;width:100%;">
+                                                    <div class="start">
+                                                        <button class="js-start btn btn-outline-light text-gray component-flat">시작지점</button>
+                                                    </div>
+                                                    <div id="startTime"></div>
+                                                    <div class="end">
+                                                        <button class="js-end btn btn-outline-light text-gray component-flat">종료지점</button>
+                                                    </div>
+                                                    <div id="endTime"></div>
+                                                    <button class="js-timeBtn btn btn-primary w-25 ml-2">등록</button>
+                                                </div>
+
+                                                <div class="actions getSelect" id="getSelect" style="display:none;">
+                                                    <div class="auto"><button class="js-auto btn btn-primary w-33 ml-2">자동인식</button></div>
+                                                    <div class="hand"><button class="js-hand btn btn-primary w-33 ml-2">직접선택</button></div>
+                                                </div>
+
+                                                <div class="actions getSelect" id="getSelect2" style="display:none;">
+                                                    <div class="cancel"><button class="js-cancel btn btn-primary w-33 ml-2">취소</button>
+                                                    </div>
+                                                    <div class="position"><button class="js-position btn btn-primary w-33 ml-2">등록</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="product_main" style="display:none;">
+                                                <div id="box_title2" class="box_list" style="font-size:18px;text-align:left;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="box_title1" class="box_list" style="font-size:18px;text-align:left;margin-top:-36px;margin-bottom:60px;">
+                                        <div class="box">
+                                            <div class="title">영상 제목</div>
+                                            <div class="input_box"><input type="text" value="" id="video_title" class="form-control"/></div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="title">관련태그</div>
+                                            <div class="input_box">
+                                                <input class="codehim-input-tags form-control" name="tags" type="text" id="tags" style="width: 100%;"/>
+                                                <section class="show-input-tags">
+                                                    <ul id="cloud-tags" class="tags cloud-tags"></ul>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="title">이미지</div>
+                                            <div id="dropzone2" style="float:left;">
+                                                <form action="/video/upload" class="dropzone" style="min-width:200px;min-height:50px;" id="demo-upload2">
+                                                    <div class="dz-message">
+                                                        <input type="text" class="d-button btn btn-sm btn-primary" value="파일선택" disabled="disabled">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div id="image_s_box" style="display:none;"><img src="/img/user1.png" style="width:170px;" /><button id="image_s_btn" style="padding:6px 30px;">변경</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="userProduct"></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 equel-grid">
+                    <div class="grid widget-revenue-card">
+                        <div class="grid-body d-flex flex-column h-100">
+                            <div class="split-header">
+                                <p class="card-title">등록 상품</p>
+                            </div>
+
+                            <div id="box_title" class="">
+                                <div class="grid table-responsive">
+                                    <table class="table table-stretched">
+                                        <thead>
+                                        <tr>
+                                            <th id="p_title">상품정보</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="show_product_list">
+                                            <tr id="none_product">
+                                                <td colspan="2">등록한 상품이 없습니다</td>
+                                            </tr>
+                                        <!--<tr>
+                                            <td>
+                                                <div class="display-avatar animated-avatar">
+                                                    <a id="product_info_link" href="https://www.lotteon.com/p/product/LO1433781446?sitmNo=LO1433781446_1433781448&mall_no=1&dp_infw_cd=BES" target="_blank">
+                                                    <img id="product_info_img" class="profile-img img-lg rounded-circle" src="https://contents.lotteon.com/itemimage/_v222630/LI/13/98/84/52/23/_1/LI1398845223_1_1.jpg/dims/resizef/554X554" alt="profile image">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="font-weight-medium">
+                                                <div><span style="display:none;">LO1433781446_1433781448</span></div>
+                                                <div id="product_info_title">[K쇼핑]끈 조절 가능한 블루나 페이스핏 KF94 보건용 마스크 90매</div>
+                                                <div id="product_info_price">43,100<b>원</b></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                &lt;!&ndash; 타임라인 수정 &ndash;&gt;
+                                                <div class="show_time">
+                                                    <div> 시간 <b id="s_time">3</b> ~  <b id="e_time">10</b>/180초</div>
+                                                    <div class="form-group mb-0">
+                                                        <p>
+                                                            <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                        </p>
+                                                        <div id="slider-range">
+                                                            <script>
+                                                                $(function() {
+                                                                    $("#slider-range").slider({
+                                                                        range: true,
+                                                                        min: 0,
+                                                                        max: 180,
+                                                                        values: [3, 10],
+                                                                        slide: function(event, ui) {
+                                                                            $('#s_time').text(ui.values[0]);
+                                                                            $('#e_time').text(ui.values[1]);
+                                                                            //$("#amount2").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                                                                        }
+                                                                    });
+                                                                    //$("#amount2").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="timeline_box">
+                                                    <button class="btn btn-outline-light text-gray component-flat w-33 ml-2" onClick="delete_product()">삭제</button>
+                                                    <button class="btn btn-primary w-33 ml-2" id="modify_product" onClick="modify_product()">수정</button>
+                                                </div>
+                                            </td>
+                                        </tr>-->
+
+                                        </tbody>
+                                    </table>
+                                    <div><button id="final_btn" class="btn btn-primary" onclick='final_btn()' style="display:none;">최종등록</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="./js/partners/index.js"></script></html>
+<script>
+    $(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 180,
+            values: [3, 10],
+            slide: function(event, ui) {
+                $('#s_time').text(ui.values[0]);
+                $('#e_time').text(ui.values[1]);
+                //$("#amount2").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        //$("#amount2").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>

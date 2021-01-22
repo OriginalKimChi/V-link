@@ -1,0 +1,7 @@
+.table-responsive{  overflow-x: visible;}
+.btn{cursor:pointer;}
+#admin_title{text-align: center;font-size: 20px;margin-top: 20px;color:gray;}
+.auth_btn_box{text-align: right;margin-bottom: 10px;}
+.auth_btn_box button{border:1px solid #373ffa;background:white;}
+.modal-backdrop{z-index: 0;}
+.modal{z-index:9999;}

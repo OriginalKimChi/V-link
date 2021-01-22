@@ -1,0 +1,58 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+@media (min-width: 350px) and (max-width: 599px) {
+	.login_box{width:100%;height:100%;}
+	.login_form{width:100%;height:100%;}
+	.logo{display:none;}
+	.m_logo{display:block;}
+	.login_title{display:none;}
+}
+
+@media (min-width:600px){
+	.login_form{width:600px;height:700px;}
+	.m_logo{display:none;}
+	.logo{display:block;}
+	.login_title{display:block;}
+}
+
+a{text-decoration:none;}
+body{font-family: 'NanumSquare', sans-serif;background:#f2f2f2;}
+.normal { font-weight: 400 }
+.bold { font-weight: 700 }
+.bolder { font-weight: 800 }
+.light { font-weight: 300 }
+.m_logo{margin-bottom:50px;}
+.logo{margin:20px 0px;}
+.login_box{position:absolute;top:50%; left:50%;transform: translate(-50%, -50%);}
+.login_form{text-align:center;padding: 28px 40px;box-sizing: border-box;background:white;border-radius:20px;box-shadow: 3px 5px 7px 3px #e2e2e2;}
+.login_form .login_title{text-align:left;margin:44px 0px;color:#7c686a;font-size: 38px;font-weight: 600;}
+.login_form .input_box .box {margin:20px 0px;}
+.login_form .input_box .box .t_box{text-align:left;color:#fc1928;font-weight:bold;}
+.login_form .input_box .box .i_box{margin:5px 0px;}
+.login_form .input_box .box .i_box input{padding:12px 7px;border: 3px solid #ece6e7;width: 100%;height: 60px;border-radius: 14px;}
+#sign_btn{cursor:pointer;font-size:18px;width: 100%;height: 60px;border-radius: 12px;border: none;background: #fc1928;color: white;}
+.login_form .btn_box{margin-top:60px;}
+.login_form .chk_box{margin-bottom:100px;}
+#id_save a, #partner_go a{color:#7c686a;}
+#id_save{float:left;}
+#partner_go{float:right;}
+
+#partners_email:focus {
+    outline: 0;
+    border: 3px solid #fc1928;
+    box-shadow: none;
+}
+#partners_password:focus {
+    outline: 0;
+    border: 3px solid #fc1928;
+    box-shadow: none;
+}
+
+.agree-term {
+  display: inline-block;
+  width: auto; }
+
+input[type="checkbox"]:checked:after, .checkbox input[type="checkbox"]:checked:after, .checkbox-inline input[type="checkbox"]:checked:after {
+    background-color: #ddd;
+    border-color: #ddd;
+}

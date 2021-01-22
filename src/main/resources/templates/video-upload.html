@@ -1,0 +1,475 @@
+<!--
+
+=========================================================
+* Volt - Bootstrap 5 Admin Dashboard
+=========================================================
+
+* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
+* Copyright 2020 Themesberg (https://www.themesberg.com)
+
+* Designed and coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
+
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Primary Meta Tags -->
+    <title>V-link</title>
+    <link rel="icon" href="/img/round_logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Volt - Free Bootstrap 5 Dashboard">
+    <meta name="author" content="Themesberg">
+    <meta name="description" content="Volt is a free and open source Bootstrap 5 Admin Dashboard featuring 11 example pages, 100 components and 3 plugins with Vanilla JS.">
+    <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, free bootstrap 5 dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, themesberg, themesberg dashboard, themesberg admin dashboard" />
+    <link rel="canonical" href="https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demo.themesberg.com/volt">
+    <meta property="og:title" content="Volt - Free Bootstrap 5 Dashboard">
+    <meta property="og:description" content="Volt is a free and open source Bootstrap 5 Admin Dashboard featuring 11 example pages, 100 components and 3 plugins with Vanilla JS.">
+    <meta property="og:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-bootstrap-5-dashboard/volt-bootstrap-5-dashboard-preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://demo.themesberg.com/volt">
+    <meta property="twitter:title" content="Volt - Free Bootstrap 5 Dashboard">
+    <meta property="twitter:description" content="Volt is a free and open source Bootstrap 5 Admin Dashboard featuring 11 example pages, 100 components and 3 plugins with Vanilla JS.">
+    <meta property="twitter:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-bootstrap-5-dashboard/volt-bootstrap-5-dashboard-preview.jpg">
+
+    <!-- Favicon -->
+    <!--<link rel="apple-touch-icon" sizes="120x120" href="./assets/img/favicon/apple-touch-icon.png">-->
+    <!--<link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">-->
+    <!--<link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">-->
+    <link rel="manifest" href="./assets/img/favicon/site.webmanifest">
+    <!--<link rel="mask-icon" href="./assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">-->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fontawesome -->
+    <link type="text/css" href="./vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Notyf -->
+    <link type="text/css" href="./vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="./css/volt.css" rel="stylesheet">
+
+    <!-- JQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+    <!-- prettytag -->
+    <script src="./js/prettytag.js"></script>
+    <link rel="stylesheet" href="./css/prettytag.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+
+    <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+    <link rel="stylesheet" href="./css/partners/video_upload.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.css" />
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.min.js"></script>
+    <script src="./js/plyr-plugin-capture.js"></script>
+
+    <script src="/js/fabric.js"></script>
+    <script src="/js/fabric.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
+    <a class="navbar-brand mr-lg-5" href="./index.html">
+        <img class="navbar-brand-dark" src="./assets/img/brand/light.svg" alt="Volt logo" /> <img class="navbar-brand-light" src="./assets/img/brand/dark.svg" alt="Volt logo" />
+    </a>
+    <div class="d-flex align-items-center">
+        <button class="navbar-toggler d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="container-fluid bg-soft">
+    <div class="row">
+        <div class="col-12">
+            <nav id="sidebarMenu" class="sidebar d-md-block bg-primary text-white collapse" data-simplebar>
+                <div class="sidebar-inner px-4 pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item text-center">
+                            <a href="/dashboard">
+                                <img class="logo" src="./img/logo.png" alt="" style="height: 50px; margin-bottom: 30px;">
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/dashboard" class="nav-link">
+                                <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                                <span>대시보드</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="/video-upload" class="nav-link">
+                                <span class="sidebar-icon"><span class="fas fa-rocket"></span></span>
+                                <span>비디오 등록</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/video-list" class="nav-link">
+                                <span class="sidebar-icon"><span class="fas fa-table"></span></span>
+                                <span>비디오 관리</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/mail-contact" class="nav-link">
+                                <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
+                                <span>문의하기</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/change-password" class="nav-link">
+                                <span class="sidebar-icon"><span class="fas fa-cog"></span></span>
+                                <span>설정</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="content">
+                <div class="blackScreen"></div>
+                <div id="upload_loading" class="blackScreen loadingP" style="height:100%;">
+                    <div id="loading"></div>
+                </div>
+
+                <!-- 상품 검색 팝업 -->
+                <div style="padding-right: 17px;z-index:9999;" class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">상품 검색</h5>
+                                <button type="button" class="close" onclick="closePop()"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="searchBar">
+                                    <div class="input_div">
+                                        <input id="product_name" type="text" value="" placeholder="상품명을 입력하세요" class="form-control" />
+                                    </div>
+                                    <div class="btn_div">
+                                        <button id="search_product_btn" onclick="searchBtn()" class="btn btn-primary">검색</button>
+                                    </div>
+                                </div>
+                                <div class="keyword_show">
+                                    <span id="keyword_box" style="display: none;"><b style="color:#696ffb;">"<span id="s_keyword"></span>"</b>의 결과입니다.</span>
+                                </div>
+                                <div id="p_info_list">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="closePop()">Close</button><button type="button" class="btn btn-primary" onclick="selectProduct()">선택</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
+                    <div class="container-fluid px-0">
+                        <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+                            <div class="d-flex">
+                                <!-- Search form -->
+                                <form class="navbar-search form-inline" id="navbar-search-main">
+                                    <div class="input-group input-group-merge search-bar">
+                                        <span class="input-group-text" id="topbar-addon"><span class="fas fa-search"></span></span>
+                                        <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Navbar links -->
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="media d-flex align-items-center">
+                                            <img class="user-avatar md-avatar rounded-circle" alt="Image placeholder" th:src="${partnersImage}">
+                                            <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
+                                                <span class="mb-0 font-small font-weight-bold" th:text="${partnersName}"></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
+                                        <a class="dropdown-item font-weight-bold" onclick="logout()"><span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+                    <div class="d-block mb-4 mb-md-0">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                                <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="#">V-link</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">비디오 등록</li>
+                            </ol>
+                        </nav>
+                        <h2 class="h4">비디오 등록</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-8 col-md-12 equel-grid">
+                        <div class="grid widget-revenue-card">
+                            <div class="grid-body d-flex flex-column h-100">
+                                <div class="split-header">
+                                    <label>업로드</label>
+                                </div>
+                                <div class="container">
+                                    <div class="contents">
+                                        <div>
+                                            <div id="dropzone" class="dropzone_box2">
+                                                <form action="/video/upload" class="dropzone" id="demo-upload">
+                                                    <div class="dz-message" styfffle="margin-top:40px;">
+                                                        <button type="button" id="video_dropzone_btn" class="dz-button">비디오를 여기에 올려주세요.</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div id="drop_after" style="display:none;">
+                                            <div class="video_box" style="position:relative;float:left;width:100%;">
+                                                <div id="auto_canvas_box"></div>
+                                                <div id="product_canvas_box"></div>
+                                                <canvas id="c" width=300 height=500 style="position:absolute;top:0;left:0;z-index:0;border:3px solid yellow;"></canvas>
+                                                <video style="z-index:555;position:absolute;left:0;top:0;" controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+                                                    <!-- Video files -->
+                                                </video>
+                                                <div class="actions" style="margin-top:30px;margin-bottom:30px;float:right;">
+                                                    <button type="button" class="js-play btn btn-primary w-33 ml-2">등록</button>
+                                                    <!-- <button type="button" class="js-complete btn btn-primary w-33 ml-2" onclick="showPop()">완료</button>-->
+                                                </div>
+                                                <div class="status_btn">
+                                                    <div class="actions getTime" id="getTime" style="display:none;width:100%;">
+                                                        <div style="margin-bottom: 20px; text-align: right;">
+                                                            <span>**원하는 <b>영상 시간대</b>에서 <b>시작지점</b> 혹은 <b>종료지점</b> 버튼을 누르시면 시간이 입력됩니다.</span>
+                                                        </div>
+                                                        <div class="start">
+                                                            <button class="js-start btn btn-primary text-white component-flat">시작지점</button>
+                                                        </div>
+                                                        <div id="startTime" style="text-align: center;"></div>
+                                                        <div class="end">
+                                                            <button class="js-end btn btn-primary text-white component-flat">종료지점</button>
+                                                        </div>
+                                                        <div id="endTime" style="text-align: center;"></div>
+                                                        <button class="js-timeBtn btn btn-primary w-25 ml-2">등록</button>
+                                                    </div>
+
+                                                    <div class="actions getSelect" id="getSelect" style="display:none;">
+                                                        <div class="auto"><button class="js-auto btn btn-primary w-33 ml-2">자동인식</button></div>
+                                                        <div class="hand"><button class="js-hand btn btn-primary w-33 ml-2">직접선택</button></div>
+                                                    </div>
+
+                                                    <div class="actions getSelect" id="getSelect2" style="display:none;">
+                                                    <span class="cancel"><button class="js-back btn btn-primary w-33 ml-2">뒤로</button>
+                                                    </span>
+                                                        <span class="cancel"><button class="js-cancel btn btn-primary w-33 ml-2">취소</button>
+                                                    </span>
+                                                        <span class="position"><button class="js-position btn btn-primary w-33 ml-2">등록</button>
+                                                    </span>
+
+                                                    </div>
+                                                </div>
+
+                                                <div id="product_main" style="display:none;">
+                                                    <div id="box_title2" class="box_list" style="font-size:18px;text-align:left;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-sm-6" style="text-align:left;margin-top:40px;margin-bottom:60px;">
+                                            <div class="mb-4">
+                                                <label for="video_title">영상 제목</label>
+                                                <input type="text" class="form-control" id="video_title">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="tags">영상 태그</label>
+                                                <input class="codehim-input-tags form-control" name="tags" type="text" id="tags" style="width: 100% !important;"/>
+                                                <section class="show-input-tags">
+                                                    <ul id="cloud-tags" class="tags cloud-tags"></ul>
+                                                </section>
+                                            </div>
+                                            <div class="box">
+                                                <label for="tags">썸네일 이미지</label>
+                                                <div id="dropzone2" class="dropzone_box4" style="margin-top: 20px">
+                                                    <form action="/video/upload" class="dropzone" id="demo-upload2" style="height: 50px; border: none;">
+                                                        <div class="dz-default dz-message text-left"><button id="profile_dropzone" class="btn btn-sm btn-primary mr-2" type="button" style="height: 35px;width: 150px;">이미지 선택</button></div>
+                                                    </form>
+                                                </div>
+                                                <div id="image_s_box"></div>
+                                            </div>
+                                            <div class="box">
+                                                <button id="final_btn" class="btn btn-primary" onclick='final_btn()'>동영상 등록</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="userProduct"></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 equel-grid">
+                        <div class="grid widget-revenue-card">
+                            <div class="grid-body d-flex flex-column h-100">
+                                <div class="split-header">
+                                    <label>등록 상품</label>
+                                </div>
+
+                                <div id="box_title" class="">
+                                    <div class="grid table-responsive">
+                                        <table class="table table-stretched">
+                                            <thead>
+                                            <tr>
+                                                <th id="p_title">상품정보</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="show_product_list">
+                                            <tr id="none_product">
+                                                <td colspan="2">등록한 상품이 없습니다</td>
+                                            </tr>
+                                            <!--<tr>
+                                                <td>
+                                                    <div class="display-avatar animated-avatar">
+                                                        <a id="product_info_link" href="https://www.lotteon.com/p/product/LO1433781446?sitmNo=LO1433781446_1433781448&mall_no=1&dp_infw_cd=BES" target="_blank">
+                                                        <img id="product_info_img" class="profile-img img-lg rounded-circle" src="https://contents.lotteon.com/itemimage/_v222630/LI/13/98/84/52/23/_1/LI1398845223_1_1.jpg/dims/resizef/554X554" alt="profile image">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class="font-weight-medium">
+                                                    <div><span style="display:none;">LO1433781446_1433781448</span></div>
+                                                    <div id="product_info_title">[K쇼핑]끈 조절 가능한 블루나 페이스핏 KF94 보건용 마스크 90매</div>
+                                                    <div id="product_info_price">43,100<b>원</b></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    &lt;!&ndash; 타임라인 수정 &ndash;&gt;
+                                                    <div class="show_time">
+                                                        <div> 시간 <b id="s_time">3</b> ~  <b id="e_time">10</b>/180초</div>
+                                                        <div class="form-group mb-0">
+                                                            <p>
+                                                                <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                                            </p>
+                                                            <div id="slider-range">
+                                                                <script>
+                                                                    $(function() {
+                                                                        $("#slider-range").slider({
+                                                                            range: true,
+                                                                            min: 0,
+                                                                            max: 180,
+                                                                            values: [3, 10],
+                                                                            slide: function(event, ui) {
+                                                                                $('#s_time').text(ui.values[0]);
+                                                                                $('#e_time').text(ui.values[1]);
+                                                                                //$("#amount2").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                                                                            }
+                                                                        });
+                                                                        //$("#amount2").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="timeline_box">
+                                                        <button class="btn btn-outline-light text-gray component-flat w-33 ml-2" onClick="delete_product()">삭제</button>
+                                                        <button class="btn btn-primary w-33 ml-2" id="modify_product" onClick="modify_product()">수정</button>
+                                                    </div>
+                                                </td>
+                                            </tr>-->
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer section py-5">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                            <p class="mb-0 text-center text-xl-left">Copyright © <span class="current-year"></span> <a class="text-primary font-weight-normal" href="https://themesberg.com" target="_blank">V-link</a></p>
+                        </div>
+
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+</div>
+
+<!-- Core -->
+<script src="./vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Vendor JS -->
+<script src="./vendor/onscreen/dist/on-screen.umd.min.js"></script>
+
+<!-- Slider -->
+<script src="./vendor/nouislider/distribute/nouislider.min.js"></script>
+
+<!-- Jarallax -->
+<script src="./vendor/jarallax/dist/jarallax.min.js"></script>
+
+<!-- Smooth scroll -->
+<script src="./vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<!-- Count up -->
+<script src="./vendor/countup.js/dist/countUp.umd.js"></script>
+
+<!-- Notyf -->
+<script src="./vendor/notyf/notyf.min.js"></script>
+
+<!-- Charts -->
+<script src="./vendor/chartist/dist/chartist.min.js"></script>
+<script src="./vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+
+<!-- Datepicker -->
+<script src="./vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+<!-- Simplebar -->
+<script src="../vendor/simplebar/dist/simplebar.min.js"></script>
+
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Volt JS -->
+<script src="./assets/js/volt.js"></script>
+
+<script src="./js/partners/video_upload.js"></script></html>
+<script>
+    $(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 180,
+            values: [3, 10],
+            slide: function(event, ui) {
+                $('#s_time').text(ui.values[0]);
+                $('#e_time').text(ui.values[1]);
+                //$("#amount2").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        //$("#amount2").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
+
+</body>
+</html>

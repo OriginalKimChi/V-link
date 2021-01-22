@@ -1,0 +1,2357 @@
+Index: src/main/resources/static/js/admin/admin_ap.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/js/admin/admin_ap.js b/src/main/resources/static/js/admin/admin_ap.js
+--- a/src/main/resources/static/js/admin/admin_ap.js	(date 1609909013394)
++++ b/src/main/resources/static/js/admin/admin_ap.js	(date 1609909013394)
+@@ -1,14 +1,63 @@
+ //파트너스 정보 보기
+-function show_partners(id,profile,email,name,facebook,instagram,naver,daum){
+-    console.log(id);
+-    $("#pa_info_img").attr("src", profile);
+-    $('#pa_id').val(id);
+-    $('#pa_email').val(email);
+-    $('#pa_name').val(name);
+-    $('#sns1').val(facebook);
+-    $('#sns2').val(instagram);
+-    $('#blog1').val(naver);
+-    $('#blog2').val(daum);
++function show_partners(id){
++    var snsBox=0;
++    var blogBox=0;
++    var s=0;
++    var b=0;
++
++    $.ajax({
++        type: "get",
++        url: "/admin/all-partners",
++        dataType: "json",
++        contentType: "application/json; charset=utf-8",
++        success: function(res) {
++            if (res.code == 200) {
++                for (var i = 0; i < Object.keys(res.data).length; i++) {
++                    var sns = res.data.snsAccount[i];
++
++
++                    var blog = res.data.blogURL[i];
++
++                    if (s in sns) {
++                        snsBox +="<div class='form-group row showcase_row_area'>"+
++                        "<div class='col-md-2 showcase_text_area'>"+
++                            "<label for='sns"+(i+1)+"'>sns</label>"+
++                            "</div>"+
++                    "<div class='col-md-10 showcase_content_area'>"+
++                    "<input type='text' class='form-control' id='sns"+(i+1)+"' readonly='readonly' value='"+sns.domain[s]+"-"+sns.account[s]+"'>"+
++                    "</div>"+
++                    "</div>";
++                            s++;
++                    }
++                    if (b in blog) {
++                        blogBox +="<div class='form-group row showcase_row_area'>"+
++                            "<div class='col-md-2 showcase_text_area'>"+
++                            "<label for='blog"+(i+1)+"'>blog</label>"+
++                            "</div>"+
++                            "<div class='col-md-10 showcase_content_area'>"+
++                            "<input type='text' class='form-control' id='blog"+(i+1)+"' readonly='readonly' value='"+blog.domain[s]+"-"+blog.account[s]+"'>"+
++                            "</div>"+
++                            "</div>";
++                        b++;
++                    }
++                   if(res.data.id==id){
++                       $("#pa_info_img").attr("src", res.data.profileImageURL);
++                       $('#pa_id').text(res.data.id);
++                       $('#pa_email').text(res.data.email);
++                       $('#pa_name').text(res.data.name);
++                       $('#admin_info_list').append(snsBox+blogBox);
++
++                   }
++                }
++
++
++            } else {
++                alert('파트너스 리스트 조회 실패');
++            }
++        },error: function() {
++            alert('파트너스 승인 오류');
++        }
++    });
+ }
+ 
+ //파트너스 승인
+@@ -66,72 +115,7 @@
+             }
+         },
+         error: function () {
+-            //alert('오류입니다');
+-            var res ={
+-                "code": 200,
+-                "message": "success",
+-                "data": [
+-                    {
+-                        "id": "5fd71a2bb31a985da10a220a",
+-                        "email": "pjhyl1127@gmail.com",
+-                        "name": "tester",
+-                        "profileImageURL": "https://vlink-data.s3.ap-northeast-2.amazonaws.com/user_image.png",
+-                        "snsAccount": [
+-                            {
+-                                "domain": "facebook",
+-                                "account": "facebook1"
+-                            },{
+-                                "domain": "instagram",
+-                                "account": "@junghwnaTa"
+-                            }
+-                        ],
+-                        "blogURL": [{
+-                            "domain": "naver",
+-                            "account": "naver url"
+-                        },{
+-                            "domain": "daum",
+-                            "account": "daum url"
+-                        }],
+-                        "interestField": [
+-                            "love",
+-                            "peace"
+-                        ],
+-                        "password": null,
+-                        "authState": false,
+-                        "videoList": null,
+-                        "followeeList": null,
+-                        "createAt": "2020-12-14 16:54:19"
+-                    }
+-                ]
+-            };
+-            if (res.code == 200) {
+-                for (var i = 0; i < Object.keys(res.data).length; i++) {
+-                    var id = res.data[i].id;
+-                    var email = res.data[i].email;
+-                    var profile = res.data[i].profileImageURL;
+-                    var name = res.data[i].name;
+-                    var facebook = res.data[i].snsAccount[0].account;
+-                    var instagram = res.data[i].snsAccount[1].account;
+-                    var naver = res.data[i].blogURL[0].account;
+-                    var daum = res.data[i].blogURL[1].account;
+-
+-                    $('#show_admin_list').append("<tr>" +
+-                        "<td>" +
+-                        "<p class='mb-n1 font-weight-medium'>" + (i + 1) + "</p>" +
+-                        "</td>" +
+-                        "<td class='font-weight-medium'>" + res.data[i].id + "</td>" +
+-                        "<td class='font-weight-medium'>" +
+-                        "<div style='margin-top:10px;'>" +
+-                        "<button class='btn btn-outline-light text-gray component-flat w-40 mr-2' onClick=show_partners('"+id+"','"+profile+"','"+email+"','"+name+"','"+facebook+"','"+instagram+"','"+naver+"','"+daum+"')>보기</button>"+
+-                        "<button class='btn btn-primary w-40 ml-2' onClick='ap_partners('"+res.data[i].id+"')'>승인</button>"+
+-                        "</div>" +
+-                        "</td>" +
+-                        "</tr>");
+-                    //id,profile,name,facebook,instagram,naver,daum
+-                }
+-
+-
+-            }
++            alert('오류입니다');
+         }
+     });
+ });
+Index: src/main/resources/static/js/admin/admin_list.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/js/admin/admin_list.js b/src/main/resources/static/js/admin/admin_list.js
+--- a/src/main/resources/static/js/admin/admin_list.js	(date 1609909013397)
++++ b/src/main/resources/static/js/admin/admin_list.js	(date 1609909013397)
+@@ -1,14 +1,63 @@
+ //파트너스 정보 보기
+-function show_partners(id,profile,email,name,facebook,instagram,naver,daum){
++function show_partners(id){
++    var snsBox=0;
++    var blogBox=0;
++    var s=0;
++    var b=0;
++
++    $.ajax({
++        type: "get",
++        url: "/admin/all-partners",
++        dataType: "json",
++        contentType: "application/json; charset=utf-8",
++        success: function(res) {
++            if (res.code == 200) {
++                for (var i = 0; i < Object.keys(res.data).length; i++) {
++                    var sns = res.data.snsAccount[i];
++
++
++                    var blog = res.data.blogURL[i];
++
++                    if (s in sns) {
++                        snsBox +="<div class='form-group row showcase_row_area'>"+
++                            "<div class='col-md-2 showcase_text_area'>"+
++                            "<label for='sns"+(i+1)+"'>sns</label>"+
++                            "</div>"+
++                            "<div class='col-md-10 showcase_content_area'>"+
++                            "<input type='text' class='form-control' id='sns"+(i+1)+"' readonly='readonly' value='"+sns.domain[s]+"-"+sns.account[s]+"'>"+
++                            "</div>"+
++                            "</div>";
++                        s++;
++                    }
++                    if (b in blog) {
++                        blogBox +="<div class='form-group row showcase_row_area'>"+
++                            "<div class='col-md-2 showcase_text_area'>"+
++                            "<label for='blog"+(i+1)+"'>blog</label>"+
++                            "</div>"+
++                            "<div class='col-md-10 showcase_content_area'>"+
++                            "<input type='text' class='form-control' id='blog"+(i+1)+"' readonly='readonly' value='"+blog.domain[s]+"-"+blog.account[s]+"'>"+
++                            "</div>"+
++                            "</div>";
++                        b++;
++                    }
++                    if(res.data.id==id){
++                        $("#pa_info_img").attr("src", res.data.profileImageURL);
++                        $('#pa_id').text(res.data.id);
++                        $('#pa_email').text(res.data.email);
++                        $('#pa_name').text(res.data.name);
++                        $('#admin_info_list').append(snsBox+blogBox);
+ 
+-    $("#pa_info_img").attr("src", profile);
+-    $('#pa_id').text(id);
+-    $('#pa_email').text(email);
+-    $('#pa_name').text(name);
+-    $('#sns1').text(facebook);
+-    $('#sns2').text(instagram);
+-    $('#blog1').text(naver);
+-    $('#blog2').text(daum);
++                    }
++                }
++
++
++            } else {
++                alert('파트너스 리스트 조회 실패');
++            }
++        },error: function() {
++            alert('파트너스 승인 오류');
++        }
++    });
+ }
+ 
+ //파트너스 승인
+@@ -76,64 +125,7 @@
+             }
+         },
+         error: function () {
+-            //alert('오류입니다');
+-            var res ={
+-                "code": 200,
+-                "message": "success",
+-                "data": [
+-                    {
+-                        "id": "5fd71a2bb31a985da10a220a",
+-                        "email": "pjhyl1127@gmail.com",
+-                        "name": "tester",
+-                        "profileImageURL": "https://vlink-data.s3.ap-northeast-2.amazonaws.com/user_image.png",
+-                        "snsAccount": [
+-                            {
+-                                "domain": "instagram",
+-                                "account": "@junghwnaTa"
+-                            }
+-                        ],
+-                        "blogURL": {
+-                            "domain": "naver",
+-                            "account": "naver url"
+-                        },
+-                        "interestField": [
+-                            "love",
+-                            "peace"
+-                        ],
+-                        "password": "MI35YF5A39",
+-                        "authState": true,
+-                        "videoList": null,
+-                        "followeeList": null,
+-                        "createAt": "2020-12-14 16:54:19"
+-                    }
+-                ]
+-            };
+-            if (res.code == 200) {
+-                for (var i = 0; i < Object.keys(res.data).length; i++) {
+-                    var id = res.data[i].id;
+-                    var email = res.data[i].email;
+-                    var profile = res.data[i].profileImageURL;
+-                    var name = res.data[i].name;
+-                    var facebook = res.data[i].snsAccount[0].account;
+-                    var instagram = res.data[i].snsAccount[1].account;
+-                    var naver = res.data[i].blogURL[0].account;
+-                    var daum = res.data[i].blogURL[1].account;
+-                    $('#show_admin_list').append("<tr>" +
+-                        "<td>" +
+-                        "<p class='mb-n1 font-weight-medium'>" + (i + 1) + "</p>" +
+-                        "</td>" +
+-                        "<td class='font-weight-medium'>" + res.data[i].id + "</td>" +
+-                        "<td class='font-weight-medium'>" +
+-                        "<div style='margin-top:10px;'>" +
+-                        "<button class='btn btn-outline-light text-gray component-flat w-40 mr-2' data-toggle='modal' data-target='#myModal' onClick='show_partners('"+id+"','"+profile+"','"+email+"','"+name+"','"+facebook+"','"+instagram+"','"+"','"+naver+"','"+daum+"')'>보기</button>"+
+-                        "</div>" +
+-                        "</td>" +
+-                        "</tr>");
+-
+-                }
+-
+-
+-            }
++            alert('오류입니다');
+         }
+     });
+ });
+Index: src/main/resources/static/js/prettytag.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/js/prettytag.js b/src/main/resources/static/js/prettytag.js
+--- a/src/main/resources/static/js/prettytag.js	(date 1609909013424)
++++ b/src/main/resources/static/js/prettytag.js	(date 1609909013424)
+@@ -97,7 +97,7 @@
+     var mct = $(".cloud-tags").find("a");  //select all tags links to make them colorful
+ 
+     /*Array of Colors */
+-    var tagColor = ["#696ffb"];
++    var tagColor = ["#e70012", "#e70012", "#e70012", "#e70012", "#e70012", "#e70012", "#e70012", "#e70012", "#e70012"];
+ //    var tagColor = ["#ff0084", "#ff66ff","#43cea2","#D38312","#73C8A9","#9D50BB",
+ //    "#780206","#FF4E50","#ADD100",
+ //    "#0F2027","#00c6ff", "#81D8D0", "#5CB3FF", "#95B9C7", "#C11B17", "#3B9C9C" , "#FF7F50", "#FFD801", "#79BAEC", "#F660AB", "#3D3C3A", "#3EA055"];
+Index: src/main/resources/static/css/partners/header2.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/header2.css b/src/main/resources/static/css/partners/header2.css
+--- a/src/main/resources/static/css/partners/header2.css	(date 1609909098736)
++++ b/src/main/resources/static/css/partners/header2.css	(date 1609909098736)
+@@ -1,7 +1,7 @@
+ #dropzone{border:none;}
+ .user-profile{position: relative;}
+ .user-profile .img{position: absolute;right: 65px;top: 110px;z-index: 999;}
+-#profile_dropzone{border: none;background: #e2e2e2;padding: 4px 6px;    position: absolute;border-radius: 5px;bottom: 0px;right: 0px;}
++#profile_dropzone{border: none;background: #e2e2e2;padding: 4px 6px;    position: absolute;border-radius: 5px;bottom: 40px;right: 90px;}
+ .navigation-menu i{margin-right:10px;}
+ .navigation-menu li a span{text-align: left;}
+ .sidebar .user-profile .ct{width:40px;}
+\ No newline at end of file
+Index: src/main/resources/static/css/partners/__index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/__index.html b/src/main/resources/static/css/partners/__index.html
+new file mode 100644
+--- /dev/null	(date 1609909098735)
++++ b/src/main/resources/static/css/partners/__index.html	(date 1609909098735)
+@@ -0,0 +1,205 @@
++<div class="page-content-wrapper">
++    <div class="page-content-wrapper-inner">
++        <div class="content-viewport">
++            <div class="row">
++                <div class="col-lg-8 col-md-12 equel-grid">
++                    <div class="grid widget-revenue-card">
++                        <div class="grid-body d-flex flex-column h-100">
++                            <div class="split-header">
++                                <p class="card-title">비디오 업로드</p>
++                            </div>
++
++                            <div class="container">
++                                <div class="contents">
++                                    <div>
++                                        <div id="dropzone" class="dropzone_box2">
++                                            <form action="/video/upload" class="dropzone" id="demo-upload">
++                                                <div class="dz-message" styfffle="margin-top:40px;">
++                                                    <button type="button" id="video_dropzone_btn" class="dz-button">Drop files
++                                                        here or click to upload.</button>
++                                                </div>
++                                            </form>
++                                        </div>
++                                    </div>
++
++                                    <div id="drop_after" style="display:none;">
++                                        <div class="video_box" style="position:relative;float:left;width:100%;">
++                                            <canvas id="c" width=300 height=500 style="position:absolute;top:0;left:0;z-index:0;border:3px solid yellow;"></canvas>
++                                            <video style="z-index:555;position:absolute;left:0;top:0;" controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
++                                                <!-- Video files -->
++                                            </video>
++
++                                            <div class="actions" style="margin-top:30px;margin-bottom:30px;">
++                                                <button type="button" class="btn js-play">시작</button>
++                                                <button type="button" class="btn js-complete">완료</button>
++                                            </div>
++                                            <div class="status_btn">
++                                                <div class="actions getTime" id="getTime" style="display:none;width:100%;">
++                                                    <div class="start" style="width:50%;float:left;margin-bottom:20px;"><button class="btn2 js-start">시작지점</button></div>
++                                                    <div id="startTime" style="width:50%;float:left;height:42px;margin-bottom:20px;"></div>
++                                                    <div class="end" style="width:50%;float:left;height:42px;margin-bottom:20px;"><button class="btn2 js-end">종료지점</button></div>
++                                                    <div id="endTime" style="width:50%;float:left;height:42px;margin-bottom:20px;"></div>
++                                                    <div style="height:42px;width:100%;text-align:right;">
++                                                        <button class="btn2 js-timeBtn" style="background:#e70012;color:white;">등록</button>
++                                                    </div>
++                                                    <div style="clear:both;"></div>
++                                                </div>
++
++                                                <div class="actions getSelect" id="getSelect" style="display:none;width:100%;">
++                                                    <div class="auto" style="width:50%;float:left;"><button class="btn2 js-auto">자동인식</button></div>
++                                                    <div class="hand" style="width:50%;float:left;"><button class="btn2 js-hand">직접선택</button></div>
++                                                </div>
++
++                                                <div class="actions getSelect" id="getSelect2" style="display:none;width:100%;">
++                                                    <div class="cancel" style="width:50%;float:left;"><button class="btn2 js-cancel">취소</button>
++                                                    </div>
++                                                    <div class="position" style="width:50%;float:left;"><button class="btn2 js-position">등록</button>
++                                                    </div>
++                                                </div>
++                                            </div>
++
++                                            <div id="product_main" style="display:none;">
++                                                <div id="box_title2" class="box_list" style="font-size:18px;text-align:left;">
++                                                </div>
++                                            </div>
++                                        </div>
++                                    </div>
++
++                                    <div id="box_title1" class="box_list" style="font-size:18px;text-align:left;margin-top:-36px;margin-bottom:60px;">
++                                        <div class="box">
++                                            <div class="title">영상 제목</div>
++                                            <div class="input_box"><input type="text" value="" id="video_title" /></div>
++                                        </div>
++                                        <div class="box">
++                                            <div class="title">관련태그</div>
++                                            <div class="input_box">
++                                                <input class="codehim-input-tags" name="tags" type="text" id="tags" />
++                                                <section class="show-input-tags">
++                                                    <ul class="tags cloud-tags"></ul>
++                                                </section>
++                                            </div>
++                                        </div>
++                                        <div class="box">
++                                            <div class="title">이미지</div>
++                                            <div id="dropzone2" style="float:left;">
++                                                <form action="/video/upload" class="dropzone" style="min-width:200px;min-height:50px;" id="demo-upload2">
++                                                    <div class="dz-message">
++                                                        <input type="text" class="d-button" value="파일선택" disabled="disabled" style="width:auto;text-align:center;background:#898989;color:white;">
++                                                    </div>
++                                                </form>
++                                            </div>
++                                            <div id="image_s_box" style="display:none;"><img src="/img/user1.png" style="width:170px;" /><button id="image_s_btn" style="padding:6px 30px;">변경</button></div>
++                                        </div>
++                                    </div>
++                                </div>
++
++                                <div id="userProduct"></div>
++
++
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="col-lg-4 col-md-12 equel-grid">
++                    <div class="grid widget-revenue-card">
++                        <div class="grid-body d-flex flex-column h-100">
++                            <div class="split-header">
++                                <p class="card-title">등록 상품</p>
++                            </div>
++
++                            <div id="box_title" class="">
++                                <div class="product_list">
++                                    <div class="product_info_box">
++
++                                        <div class="img"><img id="product_info_img" src="https://contents.lotteon.com/itemimage/_v222630/LI/13/98/84/52/23/_1/LI1398845223_1_1.jpg/dims/resizef/554X554" />
++                                        </div>
++
++
++
++                                        <div class="product_info">
++                                            <div><span style="display:none;">LO1433781446_1433781448</span><b>1번</b></div>
++                                            <div id="product_info_title">[K쇼핑]끈 조절 가능한 블루나 페이스핏 KF94 보건용 마스크 90매</div>
++                                            <div id="product_info_price">43,100<b>원</b></div>
++                                            <div ><a id="product_info_link" href="https://www.lotteon.com/p/product/LO1433781446?sitmNo=LO1433781446_1433781448&mall_no=1&dp_infw_cd=BES" target="_blank">바로가기</a></div>
++                                        </div>
++                                    </div>
++                                    <div class="timeline">
++                                        <div class="start_input">시작 : <input type="text" value="3" id="s_time" readonly />초</div>
++                                        <div class="end_input">종료 : <input type="text" value="20" id="e_time" readonly />초</div>
++                                    </div>
++                                    <div class="product_modify">
++                                        <button class="btn btn-sm btn-primary" id="modify_product" onClick="modify_product()">수정</button>
++                                        <button class="btn btn-sm btn-primary" id="save_product" onClick="save_product()">저장</button>
++                                        <button class="btn btn-sm btn-primary">취소</button></td>
++                                        <button class="btn btn-sm btn-primary" onClick="showPopup()">상품 검색</button></td>
++                                    </div>
++                                </div>
++                                <div><button id="final_btn" btn btn-primary>최종등록</button></div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++
++        </div>
++    </div>
++</div>
++
++<div id="upload_loading" class="blackScreen loadingP" style="height:100%;">
++    <div id="loading"></div>
++</div>
++
++<div style="width:100%;z-index:9999;"><button id="add_product_btn" onClick="showPopup()"></button></div>
++
++<!-- 팝업 -->
++<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productListPopup"> 팝업 </button>
++
++<div class="modal fade" id="productListPopup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
++    <div class="modal-dialog" role="document">
++        <div class="modal-content">
++            <div class="modal-header">
++                <h5 class="modal-title" id="staticBackdropLabel">상품 검색</h5>
++                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
++            </div>
++            <div class="modal-body">
++                <div class="item-wrapper">
++                    <div class="row mb-3">
++                        <div class="searchPop col-md-10 mx-auto">
++                            <div class="searchBar form-group row showcase_row_area">
++                                <div class="col-md-9 showcase_text_area">
++                                    <input id="product_name" type="text" value="" placeholder="상품명을 입력하세요" />
++                                </div>
++                                <div class="col-md-3 showcase_content_area">
++                                    <button type="button" class="btn btn-secondary" id="search_product_btn">검색</button>
++                                </div>
++                            </div>
++                            <div class="form-group row showcase_row_area">
++                                <div class="col-md-12 showcase_text_area">
++                                    <div class="keyword_show" style="display:none;"><b style="color:#e70012;">"<span id="s_keyword"></span>"</b>의 결과입니다.</div>
++                                </div>
++                            </div>
++                            <div class="form-group row showcase_row_area">
++                                <div class="col-md-12 showcase_text_area">
++                                    <div id="p_info_list">
++                                    </div>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++            <div class="modal-footer">
++                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary">등록</button>
++            </div>
++        </div>
++    </div>
++</div>
++</body>
++</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </html>
++<script src="./js/partners/index.js"></script>
++
++
++
++
++
++
+Index: src/main/resources/static/css/partners/mainPage2.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/mainPage2.css b/src/main/resources/static/css/partners/mainPage2.css
+new file mode 100644
+--- /dev/null	(date 1609909098737)
++++ b/src/main/resources/static/css/partners/mainPage2.css	(date 1609909098737)
+@@ -0,0 +1,12 @@
++.sta_list{float:left;}
++.sta_list .sta{width:33.3%;float:left;margin-top:20px;}
++#profile .box div.icon{width:20%;float:left;margin-right:10px;}
++#follow_count,#total_count,#log_out{width:80%;float:left;}
++.product_name{text-overflow:ellipsis; overflow:hidden;white-space:nowrap;width: 150px;}
++.img-sm{width:60px;height:60px;}
++@media (min-width: 1200px) {
++    .vertical-timeline-wrapper {
++        float: left;
++        width: 50%;
++    }
++}
+\ No newline at end of file
+Index: src/main/resources/static/css/partners/savedVideo2.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/savedVideo2.css b/src/main/resources/static/css/partners/savedVideo2.css
+new file mode 100644
+--- /dev/null	(date 1609909013389)
++++ b/src/main/resources/static/css/partners/savedVideo2.css	(date 1609909013389)
+@@ -0,0 +1,17 @@
++span.link-title{margin-left:10px;}
++
++.d-flex p i{font-size:30px;}
++.my_video_box{float:left;}
++
++.top_box .count {width:100%;float:left;}
++.top_box .list{width:32%;float:left;text-align: center;margin:20px 0px;}
++.top_box .img_cover .time{position: absolute;bottom: 0;right: 0;color: white;text-align: right;/* width: 100%; */}
++.top_box .img_cover span{color:white;background:black;}
++.top_box .img_cover img{width:100%;}
++.top_box h5{font-size:14px;margin-top:10px;}
++.top_box .card-title{margin:10px 0px;}
++.top_box .card-title i{margin-right:10px;font-size:20px;}
++.top_box .count .icon i{color:#696ffb;}
++#my_video{width:100%;}
++#my_video h5{font-size:15px;}
++.tag{background: #e2e2e2;border-radius: 10px;padding:5px;}
+\ No newline at end of file
+Index: src/main/resources/static/css/partners/mainPage.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/mainPage.css b/src/main/resources/static/css/partners/mainPage.css
+--- a/src/main/resources/static/css/partners/mainPage.css	(date 1609909013384)
++++ b/src/main/resources/static/css/partners/mainPage.css	(date 1609909013384)
+@@ -1,15 +1,473 @@
+-.sta_list{float:left;}
+-.sta_list .sta{width:33.3%;float:left;margin-top:20px;}
+-#profile .box div.icon{width:20%;float:left;margin-right:10px;}
+-#follow_count,#total_count,#log_out{width:80%;float:left;}
+-.product_name{text-overflow:ellipsis; overflow:hidden;white-space:nowrap;width: 150px;}
+-.img-sm{width:30px;height:30px;}
+-@media (min-width: 1200px) {
+-    .vertical-timeline-wrapper {
++a {
++    text-decoration: none;
++    color: #e70012;
++}
++
++body {
++    height: 100%;
++    background: #f6f6f6;
++    font-size: 18px;
++}
++
++* {
++    margin: 0 auto;
++}
++
++@media (min-width:350px) and (max-width:1199px) {
++    .container {
++        width: 100%;
++        margin-bottom: 120px;
++        padding: 20px;
++        margin-top: 40px;
++    }
++
++    #box_title {
++        width: 90%;
++        clear: both;
++        margin-left: 20px;
++    }
++
++    .sidebar {
++        display: none;
++    }
++
++    .dropzone {
++        width: 100%;
++        min-width: none;
++    }
++
++    .searchPop {
++        width: 100%;
++        height: 100%;
++    }
++
++    #padding_box {
++        height: 250px;
++        width: 100%;
++
++    .m_sidebar {
++        display: block;
++    }
++
++    .sidebar {
++        display: none;
++    }
++
++    .container .top_box {
++        width: 100%;
++        margin: 0px !important;
++    }
++}
++
++.container .top_box .sta {
++    padding: 20px;
++    box-sizing: border-box;
++    padding: 0px !important;
++}
++
++.profile_list .user_info {
++    margin: 0px 0px !important;
++    width: 90%;
++    height: auto !important;
++}
++
++.sta_list .sta {
++    width: 90% !important;
++    margin: 10px 0px;
++}
++
++.top_box_list .box {
++    width: 100% !important;
++}
++
++.bottom_box .video_list {
++    width: 90% !important;
++}
++
++.bottom_box .list2 {
++    width: 90% !important;
++    margin-top: 20px;
++    margin-left: 0px !important;
++}
++
++.top_box .profile_list .icon {
++    float: left;
++    width: 20%;
++}
++
++.profile_list .user_info .text .t {
++    text-align: left;
++}
++
++.profile_list .user_info {
++    position: relative;
++    text-align: center;
++}
++
++.profile_list .user_info .btn #profile_btn {
++    border: none;
++    padding: 5px 20px;
++    border-radius: 7px;
++    color: gray;
++}
++
++.top_box_list .product_list .product {
++    float: left;
++    width: 15%;
++    margin-right: 5px;
++}
++
++.top_box_list .product_list .product img {
++    width: 80%;
++}
++
++.profile_list .user_info .text div {
++    padding: 6px 0px;
++}
++
++.sta_list {
++    height: 100%;
++    background: white;
++    padding: 20px;
++    box-sizing: border-box;
++    margin-left: 0px;
++    width: 90%;
++}
++
++.bottom_box .list2 {
++    background: white;
++}
++}
++
++@media (min-width:1200px) {
++    .sidebar {
++        display: block;
+         float: left;
+-        width: 100%;
+-    }
+-    .vertical-timeline-wrapper .col-lg-6{
+-        float:left;
+-    }
++        width: 15%;
++        background: white;
++    }
++
++    .m_sidebar {
++        display: none;
++    }
++
++    .container {
++        width:85%;
++        padding: 15px 25px;
++        margin-left: 15%;
++    }
++
++    #box_title {
++        width: 24%;
++        padding: 20px;
++    }
++
++    .searchPop {
++        width: 500px;
++        height: 910px;
++        top: calc(12% - 99px);
++        left: calc(50% - 225px);
++    }
++
++    .top_box {
++        width: 100%;
++        height: 380px;
++        float: left;
++    }
++
++    .top_box .profile {
++        width: 21%;
++        height: 300px;
++        float: left;
++        padding-top: 20px;
++        box-sizing: border-box;
++    }
++
++    .top_box .profile_list {
++        text-align: center;
++        width: 100%;
++        box-sizing: border-box;
++        border-radius: 8px;
++        position: relative;
++    }
++
++    .top_box .sta {
++        width: 77.5%;
++        float: left;
++        padding: 20px;
++        box-sizing: border-box;
++    }
++
++    .top_box .sta_list {
++        width: 100%;
++        box-shadow: 2px 3px 5px -6px grey;
++        background: white;
++        margin-right: 20px;
++        box-sizing: border-box;
++        height: 350px;
++        border-radius: 8px;
++        background: white;
++    }
++
++    .bottom_box {
++        width: 100%;
++        height: 500px;
++    }
++
++    .profile_list .user_info .text .icon {
++        width: 20%;
++        float: left;
++    }
++
++    .profile_list .user_info .text .t {
++        width: 80%;
++        float: left;
++        text-align: left;
++    }
++
++    .profile_list .user_info .btn {
++        bottom: -9px;
++        position: absolute;
++        right: 57px;
++    }
++
++    .top_box_list .product_list .product {
++        float: left;
++        width: 15%;
++        margin-right: 5px;
++    }
++
++    .top_box_list .product_list .product img {
++        width: 100%;
++    }
++
++    .video_list .top_box {
++        height: 670px;
++    }
++
++    .profile_list .user_info .text div {
++        padding: 6px 0px;
++    }
++
++    .list2 .product_box {
++        height: 100%;
++    }
++}
++
++#box_title {
++    position: relative;
++    float: left;
++    box-sizing: border-box;
++    border-bottom: 1px solid #edecef;
++    padding-bottom: 44px;
++}
++
++h4 {
++    font-weight: 900;
++    font-size: 18px;
++    color: black;
++    margin: 15px 15px;
++    width: 100%;
++}
++
++.sta_list .sta {
++    float: left;
++    width: 33.3%;
++    background: white;
++    padding-bottom: 30px;
++}
++
++.sta_list .sta h3 {
++    margin-bottom: 20px;
++}
++
++.profile_list .user_info .text {
++    width: 70%;
++}
++
++.profile_list .user_info .text .name {
++    font-size: 26px;
++    font-weight: 600;
++}
++
++.profile_list .user_info {
++    background: white;
++    position: relative;
++    box-shadow: 2px 3px 5px -6px grey;
++    box-sizing: border-box;
++    border-radius: 8px;
++    height: 350px;
++}
++
++.profile_list .user_info .img {}
++
++.bottom_box .video_list {
++    position: relative;
++    width: 65%;
++    float: left;
++    box-shadow: 2px 3px 5px -6px grey;
++    border-radius: 8px;
++    margin-top:20px;
++}
++
++.top_box .profile h4 {
++    padding-left: 0px;
++}
++
++.top_box_list .box {
++    float: left;
++}
++
++.top_box_list .box .count .list .icon {
++    width: 20%;
++}
++
++.top_box_list .box .count .list .title {
++    margin-top: 20px;
++}
++
++.top_box_list .box .count .list .icon i {
++    color: #e70012;
++}
++
++.top_box_list .box {
++    width: 30.3%;
++    margin-right: 3%;
++    padding: 10px 15px;
++    box-sizing: border-box;
++}
++
++.top_box_list .box {
++    text-align: center;
++    background: white;
++}
++
++.top_box_list .box .title {
++    font-weight: bold;
++    color: black;
++    margin-top: 10px;
++}
++
++.top_box_list .count {
++    margin-top: 10px;
++    width: 100%;
++    height: 80px;
++    box-sizing: border-box;
++    text-align: center;
++}
++
++.top_box_list {
++    width: 100%;
++    padding: 32px 0px;
++    box-sizing: border-box;
++    border-radius: 16px;
++}
++
++.top_box_list .count .list {
++    width: 33.3% !important;
++    padding: 20px;
++    box-sizing: border-box;
++    font-weight: 800;
++    float: left;
++}
++
++.top_box_list .box .count .list .icon {
++    margin-bottom: 10px;
++    width: 20%;
++}
++
++.top_box_list .box .count .list .title {
++    margin-top: 20px;
++}
++
++.top_box_list .box .count .list .icon i {
++    color: #e70012;
++}
++
++.video_list .top_box {
++    background: white;
++    border-radius: 8px;
++}
++.video_list .top_box .box .img_cover{
++    width:100%;
++    height:300px;
++    background:black;
++}
++
++.video_list .top_box .box .img_cover img{
++    position:absolute;
++    left:0;
++    top:0;
++    width:100%;
++}
++
++.bottom_box .list2 {
++    width: 31%;
++    float: left;
++    border-radius: 8px;
++    box-shadow: 2px 3px 5px -6px grey;
++    margin-left: 20px;
++    margin-top:20px;
++    padding-bottom: 20px;
++    background: white;
++    height: 670px;
++    box-sizing: border-box;
++}
++
++.profile_list .user_info .btn .dz-button {
++    border: none;
++    border-radius: 100px;
++    background: #e4e1e1;
++    width: 35px;
++    height: 35px;
++    font-size: 17px;
++}
++
++
++.list2 .product_box {
++    background: white;
++    width: 100%;
++    border-radius: 8px;
++    padding: 0px;
++    box-sizing: border-box;
++}
++
++.list2 .product_box .product_list {
++    padding: 30px;
++    box-sizing: border-box;
++    padding-bottom: 30px;
++}
++
++.list2 .product_box .product_list .img {
++    width: 30%;
++    float: left;
++}
++
++.list2 .product_box .product_list .img img {
++    width: 80%;
++}
++
++.list2 .product_box .product_list .info {
++    width: 70%;
++    float: left;
++    padding: 20px;
++    box-sizing: border-box;
++}
++
++.list2 .product_box .product_list .info .title {
++    font-weight: bold;
++}
++
++.list2 .product_box .product_list .info div {
++    padding: 3px 0px;
++}
++
++.list2 .product_box .product_list .info .btn button {
++    cursor: pointer;
++    background: #ff7b7b;
++    border: none;
++    color: white;
++    padding: 10px 20px;
++    border-radius: 8px;
++    float: right;
+ }
+\ No newline at end of file
+Index: src/main/resources/static/css/partners/savedVideo.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/savedVideo.css b/src/main/resources/static/css/partners/savedVideo.css
+--- a/src/main/resources/static/css/partners/savedVideo.css	(date 1609909013388)
++++ b/src/main/resources/static/css/partners/savedVideo.css	(date 1609909013388)
+@@ -1,20 +1,595 @@
+-span.link-title{margin-left:10px;}
++body,pre {
++    font-family:'NanumSquare',sans-serif;
++    font-size:18px;
++}
++.normal {
++    font-weight:400
++}
++.bold {
++    font-weight:700
++}
++.bolder {
++    font-weight:800
++}
++.light {
++    font-weight:300
++}
++a {
++    text-decoration:none;
++    color:#e70012;
++}
++body {
++    height:100%;
++    background:#f6f6f6;
++}
++* {
++    margin:0 auto;
++}
++@media (min-width:350px) and (max-width:1199px) {
++    .container {
++        width:100%;
++        margin-bottom:120px;
++        padding:15px 30px;
++        margin-top:40px;
++    }
++    #box_title {
++        width:90%;
++        clear:both;
++        margin-left:20px;
++    }
++    .sidebar {
++        display:none;
++    }
++    .dropzone {
++        width:100%;
++
++    }
++    .searchPop {
++        width:100%;
++        height:100%;
++    }
++    #padding_box {
++        height: 250px;
++        width: 100%;
++    }
++    .m_sidebar {
++        display:block;
++    }
++    .sidebar {
++        display:none;
++    }
++}
++
++.video_box .box .info_box .btn_box{margin-top: 20px;
++    text-align: right;
++    width: 100%;
++    clear: both;}
++.video_box .box .info_box .btn_box button{float:right;margin-right:10px;margin-top:15px;}
++.video_box .box .info_box{width:60% !important;}
++.my_video_list .video_box .box .count{width:100% !important;margin-top:20px;}
++.my_video_list .video_box .box .count .icon i{color:#e70012;}
++#video_setup .box .box_info{padding:0px !important;height:80px;}
++
++@media (min-width:1200px) {
++    .sidebar {
++        display:block;
++        float:left;
++        width:15%;
++        background:white;
++    }
++    .m_sidebar {
++        display:none;
++    }
++    .container {
++        width:60%;
++        padding:15px 60px;
++    }
++    #box_title {
++        width:24%;
++        padding:20px;
++    }
++    .searchPop {
++        width:500px;
++        height:910px;
++        top:calc(12% - 99px);
++        left:calc(50% - 225px);
++    }
++}
++
++@media (min-width:350px) and (max-width:1199px) {
++    .container {
++        width:90%;
++        margin-bottom:120px;
++        margin-top:40px;
++    }
++    #box_title {
++        width:90%;
++        clear:both;
++        margin-left:20px;
++    }
++    .sidebar {
++        display:none;
++    }
++    .dropzone {
++        width:100%;
++
++    }
++    .searchPop {
++        width:100%;
++        height:100%;
++    }
++    #padding_box {
++        height:250px;
++        width:100%;
++    }
++    .m_sidebar {
++        display:block;
++    }
++    .sidebar {
++        display:none;
++    }
++    #my_video .box {
++        box-sizing:border-box;
++        background:white;
++    }
++    .container div .box_info {
++        width:30%;
++        float:left;
++        background:white;
++        padding:10px;
++        box-sizing:border-box;
++        margin-right:5px;
++        border-radius:8px;
++    }
++    h4 {
++        width:100%;
++        margin:40px 0px 20px 0px;
++    }
++    .container div .box_info .title {
++        color:#898989;
++        font-weight:bold;
++        margin-bottom:14px;
++    }
++    .container div .box_info .count_box {
++        text-align:center;
++
++    }
++    .container div .box_info .count_box div {
++        margin-bottom:10px;
++    }
++    .container div .box_info .count_box .icon i {
++        color:#e70012;
++    }
++    .container div .box_info .count_box .count {
++        font-weight:900;
++    }
++    .top_box_list {
++        clear:both;
++    }
++    .top_box .top_box_list .box {
++        background:white;
++    }
++    .top_box .top_box_list .box .icon i {
++        color:#e70012;
++    }
++    .top_box .top_box_list .medal {
++        text-align:center;
++    }
++
++
++
++    .top_box_list .box .title {
++
++        margin:10px 0px;
++        text-align:center;
++        font-size:18px;
++    }
++    #video_top .top_box_list .box .img_cover .time {
++        position:absolute;
++        bottom:10px;
++        right:22px;
++        color:white;
++        text-align:right;
++        width:90%;
++    }
++    .top_box_list .box .list {
++        float:left;
++        width:33.3%;
++        text-align:center;
++        border-right:1px solid #e2e2e2;
++        box-sizing:border-box;
++        background:white;
++    }
++
++    .top_box_list .box .list div {
++        margin-bottom:10px;
++    }
++    .top_box_list .img_cover {
++        text-align:center;
++    }
++    #my_video .box .img {
++        float:left;
++        width:40%;
++        padding-top:18px;
++    }
++    #my_video .info .p_img div {
++        width:25%;
++        margin-right:10px;
++        float:left;
++    }
++    #my_video .info .p_img div img {
++        width:100%;
++        float:left;
++    }
++    #my_video .box .info_box {
++        width:60%;
++        float:left;
++    }
++    #my_video .box .info .title {
++        font-weight:bold;
++        margin:10px 0px;
++    }
++    #my_video {
++        width:100%;
++    }
++    #my_video .box .tag_box {
++        clear:both;
++        padding-top:10px;
++    }
++    #my_video .box .tag_box .tag {
++        float:left;
++        margin-right:10px;
++        background:#f3e4e4;
++        padding:5px;
++        border-radius:3px;
++        color:gray;
++        margin-bottom:5px;
++    }
++    #my_video .box .time {
++        width:100%;
++        margin-top:5px;
++        color:#e70012;
++        font-weight:bold;
++    }
++    #video_setup .box .box_info{width:30.3% !important;margin-right:1% !important;}
++    #video_setup .box .count_box{padding-top:20px;}
++    #video_setup .box .count_box .count{font-size:2vh !important;}
++    #video_setup .box .icon{display:none !important;}
++    #video_setup .box .count_box,.my_video_list .video_box .box .count_box {
++        width:100%;
++        float:left;
++    }
++}
++@media (min-width:1200px) {
++    .sidebar {
++        display:block;
++        float:left;
++        width:15%;
++    }
++    .m_sidebar {
++        display:none;
++    }
++    .container {
++        width:85%;
++        margin-left:15%;
++        background:#fafafc;
++        position:relative;
++        padding:0px 25px;
++        box-sizing:border-box;
++    }
++    .container div {
++        float:left;
++        width:100%;
++    }
++    .container .box {
++    }
++    #video_setup {
++        padding-top:40px;
++    }
++    .top_box {
++        margin-top: -20px;
++    }
++    .video_box .box .info_box {
++        width:50%;
++    }
++    #video_top {
++        margin-top:30px;
++    }
++    #video_top .top_box_list .count .list,.my_video_list .video_box .box .count {
++        width:33.3% !important;
++        padding:20px;
++        box-sizing:border-box;
++        font-weight:800;
++    }
++    .top_box_list .box .count .list .icon {
++        width:20%;
++    }
++    .my_video_list .video_box .box .count .icon{
++        width:20px;
++    }
++    .top_box_list .box .count .list .title ,.my_video_list .video_box .box .count .title{
++        margin-top:20px;
++    }
++    .top_box_list .box .count .list .icon i ,.my_video_list .video_box .box .count .icon i{
++        color:#e70012;
++    }
++    .top_box_list .box {
++        width:30.3% !important;
++        margin-right:3%;
++        border-radius: 8px !important;
++    }
++    .top_box_list .box {
++        text-align:center;
++        background:white;
++        box-shadow:2px 3px 5px -6px grey;
++    }
++    .top_box_list .box .title {
++        font-weight:bold;
++        color:black;
++        margin-top:10px;
++        font-size:18px;
++    }
++    .top_box .top_box_list .box .medal {
++        text-align:center;
++    }
++    .top_box .top_box_list .box .img_cover{
++        width: 100%;
++        height: 300px;
++        background: black;
++        position: relative;
++    }
++    .top_box .top_box_list .box .img_cover img{
++        width: 100%;
++        left: 0;
++        top: 0;
++    }
++    #my_video .box .img {
++        width: 28%;
++        float: left;
++        background: black;
++        text-align: center;
++        margin-right: 20px;
++        height:300px;
++    }
++    #video_top .top_box_list .count,.my_video_list .video_box .box .count {
++        margin-top:10px;
++        width:100%;
++        height:80px;
++        box-sizing:border-box;
++        text-align:center;
++    }
++    .top_box_list {
++        padding:20px 0px;
++        box-sizing:border-box;
++        border-radius:16px;
++    }
++    #my_video {
++        margin-top:10px;
++    }
++    .container div .box_info {
++        float:left;
++        margin-right:20px;
++        padding:12px 36px;
++        box-sizing:border-box;
++        width:17%;
++        height:90px;
++        background:white;
++        border-radius:16px;
++        box-shadow:2px 3px 5px -6px grey;
++    }
++    .container div .box_info .title {
++        color:#898989;
++        font-size:20px;
++    }
++    .container div .box_info .count_box,.my_video_list .video_box .box .count_box {
++        width:100%;
++        margin-top:10px;
++    }
++    .container div .box_info .count_box .icon {
++        width:15%;
++        float:left;
++    }
++    .container div .box_info .count_box .icon i {
++        font-size:18px;
++        color:#e70012;
++    }
++    .container div .box_info .count_box .count {
++        width:85%;
++        float:left;
++        color:black;
++        font-size:18px;
++        font-weight:900;
++        line-height:16px;
++    }
++    #my_video .my_video_list {
++        background:white;
++        box-shadow:2px 3px 5px -6px grey;
++        padding:20px;
++        box-sizing:border-box;
++        border-radius:15px;
++    }
++    #my_video .info .p_img div img {
++        float:left;
++        width:100%;
++        margin-right:10px;
++    }
++    #my_video .video_box {
++        margin:30px 0px;
++    }
++    #my_video .box img {
++        width:30%;
++    }
++    #my_video .box .info {
++        width:70%;
++        padding-top:30px;
++    }
++    #my_video .info .title {
++        font-size:18px;
++        font-weight:bold;
++        color:black;
++    }
++    #my_video .info .p_img div {
++        float:left;
++        padding-right:10px;
++        width:100px;
++        margin:20px 0px;
++    }
++    #my_video .info .p_img div img {
++        width:100%;
++        margin-right:10px;
++    }
++    #my_video .box .img .time {
++        color:white;
++        position:absolute;
++        bottom:0px;
++        right:0px;
++        width:109px;
++        height:30px;
++        background:black;
++        opacity:0.6;
++        margin-right:45px;
++        text-align:center;
++
++    }
++    #my_video .box .tag_box {
++        width:100%;
++    }
++    #my_video .box .tag_box .tag {
++        float:left;
++        width:100px;
++        background:#dbdbdb;
++        padding:8px;
++        text-shadow:1px 0.01px rgba(0,0,0,0.15);
++        border-radius:6px;
++        margin-bottom:2px;
++        font-size:12px;
++        text-decoration:none;
++        color:gray;
++        transition:.2s;
++        outline:0;
++        margin:1px;
++    }
++    #box_title {
++        position:relative;
++        float:left;
++        box-sizing:border-box;
++        border-bottom:1px solid #edecef;
++        padding-bottom:44px;
++    }
++    #my_video .video_box {
++        margin:30px 0px;
++    }
++    #my_video .box img {
++        width:100%;
++    }
++    #my_video .box .info {
++        width:70%;
++        padding-top:30px;
++    }
++    #my_video .info .title {
++        font-weight:bold;
++        color:black;
++    }
++    #my_video .info .p_img div {
++        float:left;
++        padding-right:10px;
++        margin:20px 0px;
++    }
++    #my_video .box .img .time {
++        color:white;
++        position:absolute;
++        bottom:0px;
++        right:0px;
++        width:109px;
++        height:30px;
++        background:black;
++        opacity:0.6;
++        margin-right:45px;
++        text-align:center;
++    }
++
++    #my_video .box .tag_box .tag {
++        float:left;
++        background:#dbdbdb;
++        padding:8px;
++        text-shadow:1px 0.01px rgba(0,0,0,0.15);
++        border-radius:6px;
++        margin-bottom:2px;
++        font-size:12px;
++        text-decoration:none;
++        color:gray;
++        transition:.2s;
++        outline:0;
++        margin:1px;
++    }
++    .my_video_list .video_box .box .count{width:30% !important;}
++    #video_setup .box .count_box,.my_video_list .video_box .box .count_box {
++        width:100%;
++        float:left;
++    }
++    #video_setup .box .count_box{
++        width:70% !important;
++    }
++}
++#video_setup .box {
++    clear:both;
++}
++#video_setup .box .box_info {
++    width:20%;
++    background:white;
++    height:100px;
++    border-radius:8px;
++    padding:20px !important;
++    box-sizing:border-box;
++    float:left;
++    margin-right:20px;
++}
++#video_setup .box .count_box .count {
++    font-weight:900;
++    font-size:28px;
++}
++.my_video_list .video_box .box .count{
++    font-size:18px;
++}
++
++#video_setup .box .icon {
++    width:30%;
++    float:left;
++    position:relative;
++}
++#video_setup .box .icon i {
++    font-size:30px;
++    position:absolute;
++    left:0;
++    top:-6px;
++    background:#ffffd0;
++    padding:20px;
++    border-radius:100px;
++}
++#video_setup .box .count_box .title {
++    color:#8492a7;
++    margin-top:13px;
++    font-size: 15px;
++}
++#my_video .my_video_list .box .btn_box button{
++    background: #ff7b7b;
++    border: none;
++    color: white;
++    padding: 10px 33px;
++    border-radius: 7px;
++    cursor:pointer;
++    margin-right: 20px;
++}
++#my_video .my_video_list .box .list{
++    width:30% !important;
++    float:left;
++    text-align:center;
++    margin:5px;
++}
++#my_video .my_video_list .box .list div{
++    margin:5px;
++    line-height:29px;
++}
++
+ 
+-.d-flex p i{font-size:30px;}
+-.my_video_box{float:left;}
+-.top_box{float:left;}
+-.top_box .count {width:100%;float:left;}
+-.top_box .list{width:32%;float:left;text-align: center;margin:20px 0px;}
+-.top_box .img_cover .time{position: absolute;bottom: 0;right: 0;color: white;text-align: right;/* width: 100%; */}
+-.top_box .img_cover span{color:white;background:black;}
+-.top_box .img_cover img{width:100%;}
+-.top_box h5{font-size:14px;margin-top:10px;}
+-.top_box .card-title{margin:10px 0px;}
+-.top_box .card-title i{margin-right:10px;font-size:20px;}
+-.top_box .count .icon i{color:#696ffb;}
+-#my_video{width:100%;}
+-#my_video h5{font-size:15px;}
+-.tag{background: #e2e2e2;border-radius: 10px;padding:5px;}
+-.text-black{font-size: 20px;}
+-.img-sm{width:20%;height:20%;}
+-.count .wrapper{width:33.3%;}
+\ No newline at end of file
++
+Index: src/main/resources/static/css/partners/video_upload.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/static/css/partners/video_upload.css b/src/main/resources/static/css/partners/video_upload.css
+--- a/src/main/resources/static/css/partners/video_upload.css	(date 1609909098740)
++++ b/src/main/resources/static/css/partners/video_upload.css	(date 1609909098740)
+@@ -1,22 +1,24 @@
+-.sta_list{float:left;}
+-.sta_list .sta{width:33.3%;float:left;margin-top:20px;}
+-#profile .box div.icon{width:20%;float:left;margin-right:10px;}
+-#follow_count,#total_count,#log_out{width:80%;float:left;}
+-.product_name{text-overflow:ellipsis; overflow:hidden;white-space:nowrap;width: 150px;}
+-.img-sm{width:60px;height:60px;}
+-@media (min-width: 1200px) {
+-    .vertical-timeline-wrapper {
+-        float: left;
+-        width: 50%;
+-    }
+-}
+ @media (min-width: 350px) and (max-width: 1199px) {
++    .container {
++        width: 100%;
++        margin-bottom: 120px;
++        padding: 15px 30px;
++        margin-top: 40px;
++    }
++
+     #box_title {
+         width: 90%;
+         clear: both;
+         margin-left: 20px;
+     }
+ 
++    .sidebar {
++        display: none;
++    }
++
++    .dropzone {
++        width: 100%;
++    }
+ 
+     .searchPop {
+         width: 100%;
+@@ -28,10 +30,37 @@
+         width: 100%;
+     }
+ 
+-}
++    .m_sidebar {
++        display: block;
++    }
++
++    .sidebar {
++        display: none;
++    }
+ 
++}
+ 
+ @media (min-width:1200px) {
++    .sidebar {
++        display: block;
++        float: left;
++        width: 15%;
++    }
++
++    .m_sidebar {
++        display: none;
++    }
++
++    .container {
++        width: 60%;
++        padding: 15px 60px;
++        margin-left:15%;
++    }
++
++    #box_title {
++        width: 24%;
++        padding: 20px;
++    }
+ 
+     .searchPop {
+         width: 500px;
+@@ -42,6 +71,13 @@
+ }
+ 
+ 
++h4 {
++    font-weight: 900;
++    font-size: 18px;
++    color: black;
++    float: left;
++    margin: 40px 0pc;
++}
+ 
+ .box_list {
+     width: 100%;
+@@ -57,6 +93,16 @@
+ 
+ .box_list .box .title {
+     color: #4e4e4e;
++    margin-top:20px;
++}
++
++.box_list .box input {
++    border: 1px solid #d1caca;
++    width: 100%;
++    height: 50px;
++    border-radius: 14px;
++    margin-top: 10px;
++    background: #f6f6f6;
+ }
+ 
+ .box_list.product_table {
+@@ -65,10 +111,41 @@
+     width: 100%;
+ }
+ 
++
++.dropzone .dz-default.dz-message {
++    opacity: 1;
++    -ms-filter: none;
++    filter: none;
++    -webkit-transition: opacity 0.3s ease-in-out;
++    -moz-transition: opacity 0.3s ease-in-out;
++    -o-transition: opacity 0.3s ease-in-out;
++    -ms-transition: opacity 0.3s ease-in-out;
++    transition: opacity 0.3s ease-in-out;
++    background-repeat: no-repeat;
++    background-position: 0 0;
++    position: absolute;
++    width: 150px;
++    height: 100px;
++    margin-left: -54px;
++    margin-top: -50px;
++    top: 50%;
++    left: 50%;
++}
++
++.dropzone .dz-default.dz-message {
++    left: 47%;
++    top: 64%;
++}
++
+ .dropzone .dz-message {
+     text-align: center;
+ }
+ 
++
++
++.dropzone_box2 {}
++
++
+ .progress-title {
+     font-size: 18px;
+     font-weight: 700;
+@@ -292,7 +369,9 @@
+     overflow: hidden;
+ }
+ 
+-.video iframe, .video object, .video embed {
++.video iframe,
++.video object,
++.video embed {
+     position: absolute;
+     top: 0;
+     left: 0;
+@@ -300,7 +379,7 @@
+     height: 100%;
+ }
+ 
+-.plyr.video {
++.plyr--video {
+     z-index: 555;
+ }
+ 
+@@ -325,43 +404,44 @@
+     position: absolute;
+ }
+ 
+-
++.container {
++    position: relative;
++    text-align: center;
++    background: #fafcfc;
++    box-sizing: border-box;
++    float: left;
++}
+ 
+ .actions {
+-    margin-top:30px;
+-    margin-bottom:30px;
+-    float:right;
++    margin-top: 15px;
++    float: right;
+ }
+ 
+-#getTime .start,#getTime .end{
+-    width:25%;
+-    float:left;
+-}
+-
+-#getTime #startTime,#getTime #endTime{
+-    width:25%;
+-    float:left;
+-    height:50px;
++.actions .btn,
++.go_btn,
++#final_btn,
++#image_s_btn,
++#popup_btn {
++    cursor: pointer;
++    padding: 6px 61px;
++    font-size: 20px;
++    border-radius: 4px;
++    margin-right: 20px;
++    color: white;
++    background: #e70012;
++    border: none;
+ }
+-#getTime .js-start, #getTime .js-end{
+-    width:100%;
+ 
+-}
+-#getTime .js-end{
+-    clear:both;
+-}
+-
+-#getTime .js-timeBtn{
+-    float:right;
+-}
+-
+-#getSelect,#getSelect2{
+-    width: 100%;
+-    text-align: right;
+-}
+-
+-#getSelect .auto,#getSelect2 .cancel{
+-    float:left;
++.actions .btn2 {
++    padding: 6px 24px;
++    font-size: 20px;
++    border-radius: 4px;
++    margin-right: 20px;
++    color: white;
++    background: white;
++    color: #e70012;
++    border: 1px solid #e70012;
++    width: 148px;
+ }
+ 
+ #loading {
+@@ -374,7 +454,7 @@
+     animation: spin 1s ease-in-out infinite;
+     -webkit-animation: spin 1s ease-in-out infinite;
+     position: absolute;
+-    top:50%;
++    top: 18%;
+     left: 50%;
+     z-index: 9999;
+ 
+@@ -387,7 +467,6 @@
+ }
+ 
+ @-webkit-keyframes spin {
+-
+ }
+ 
+ .blackScreen.loading {
+@@ -396,7 +475,7 @@
+     position: fixed;
+ }
+ 
+-.blackScreen.loadingp .loading {
++.blackScreen.loadingP .loading {
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+@@ -416,10 +495,10 @@
+     box-sizing: border-box;
+     position: relative;
+     display: inline-block;
+-    border: solid 1px #696ffb;
++    border: solid 1px #e70012;
+     background-color: #FFF;
+     line-height: 140%;
+-    color: #696ffb;
++    color: #e70012;
+     text-align: center;
+     box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+     transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out;
+@@ -427,36 +506,319 @@
+ }
+ 
+ input[type=radio]:checked+label {
+-    background-color: #696ffb;
++    background-color: #e18d8d;
+     color: white;
+     border: none;
+     box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
++
+     z-index: 1;
+ }
+ 
++.searchPop .close {
++    color: gray;
++    float: right;
++    margin-bottom: 20px;
++    font-size: 30px;
++    text-align: right;
++    width: 100%;
++    cursor: pointer;
++}
++
++.searchPop h4 {
++    margin-bottom: 20px;
++    margin-top: 0px;
++    width: 100%;
++}
++
++.searchPop .searchBar {
++    width: 100%;
++    margin-bottom: 30px;
++}
++
++.searchPop .searchBar .input_div {
++    width: 70%;
++    margin-right: 5px;
++    float: left;
++}
++
++.searchPop .searchBar .input_div input {
++    height: 40px;
++    width: 100%;
++}
++
++.searchPop .searchBar .input_div .btn {
++    width: 100%;
++    height: 40px;
++}
++
++.searchPop .searchBar .btn_div {
++    width: 25%;
++    float: left;
++}
++
++.searchPop .searchBar .btn_div .btn {
++    width: 100%;
++    border: none;
++    background: #212121;
++    color: white;
++    padding: 10px;
++    border-radius: 5px;
++    height: 40px;
++}
++
++.searchPop .keyword_show {
++    clear: both;
++    text-align: center;
++    padding: 20px 0px;
++"><b style="color: #e70012;
++    font-size: 17px;
++}
++
++.searchPop .p_info {
++    margin-top: 30px;
++}
++
++.searchPop .p_info .image_box {
++    float: left;
++    width: 20%;
++}
++
++.searchPop .p_info .product {
++    float: left;
++    width: 54%;
++    padding: 9px 3px;
++}
++
++.searchPop .p_info .product div {
++    overflow: hidden;
++    text-overflow: ellipsis;
++    white-space: nowrap;
++}
++
++.searchPop .p_info .product .title {
++    font-size: 15px;
++    margin-bottom: 3px;
++}
++
++.searchPop .p_info .product .price {
++    color: #b1aaaa;
++}
++
++.searchPop .p_info .product .chk_box {
++    float: left;
++    width: 20%;
++}
++
++.searchPop .p_info .product .chk_box input[type=radio]+label {
++    margin-top: 20px;
++}
++
++.searchPop .p_info .product .chk_box label {
++    margin-top: 20px;
++}
++
++.searchPop .p_info .product .chk_box input[type=radio]+label {
++    margin-top: 20px;
++}
++
++input[type=radio]+label {
++    margin-top: 20px;
++}
++
++.codehim-input-tags {
++    padding: 0px;
++    margin: 0px;
++}
++
++/* width */
++::-webkit-scrollbar {
++    width: 10px;
++}
++
++/* Track */
++::-webkit-scrollbar-track {
++    background: #f1f1f1;
++}
++
++/* Handle */
++::-webkit-scrollbar-thumb {
++    background: #888;
++}
++
++/* Handle on hover */
++::-webkit-scrollbar-thumb:hover {
++    background: #555;
++}
++
++
++#box_title {
++    position: relative;
++    float: left;
++    box-sizing: border-box;
++    border-bottom: 1px solid #edecef;
++    padding-bottom: 44px;
++}
++
++
++
++.product_list {
++    float: left;
++    margin-bottom: 83px;
++    width: 100%;
++}
++
++.product_list .img {
++    width: 40%;
++    float: left;
++    padding: 14px;
++    box-sizing: border-box;
++}
++
++.product_list .img img {
++    width: 100%;
++    border-radius: 16px;
++}
++
++.product_list .product_info_box {
++    width: 100%;
++    float: left;
++}
++
++.product_list .product_info div {
++    margin-bottom: 10px;
++}
++
++.product_list .product_info .index {
++    cursor: pointer;
++}
++
++.product_list .product_info .title {font-weight:bold;}
++
++.product_list .product_info .price {
++    color: #ff3c53;
++    font-weight: 500;
++}
++
++.product_list .product_info .link a {
++    float: right;
++    background: #ececec;
++    padding: 5px 10px;
++    border-radius: 6px;
++    color: gray;
++}
+ 
++.product_list .product_info .link a {
++    text-decoration: none;
++}
+ 
+-#video_dropzone_btn{width: 100%;height: 300px;border-radius: 20px;border: none;margin-top: 10px;}
+-.product_info_title{width: 150px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+-.timeline_box{float: right;margin-top: 10px;}
+-.show_time{text-align: right;}
+-.ui-slider-range{background:#696ffb;}
+-.slider-range{background: #e2e2e2;border: none;}
++.product_list .timeline {
++    width: 100%;
++    clear: both;
++    height: 50px;
++    text-align: center;
++    line-height: 37px;
++}
+ 
+-#p_info_list .p_info .image_box{width:30%;float:left;}
+-#p_info_list .p_info .product{width:50%;float:left;padding-right: 10px;box-sizing: border-box;color:black;}
+-#p_info_list .p_info .chk_box{width:20%;float:left;padding-top: 20px;}
++.product_list .timeline .start_input {
++    float: left;
++    width: 50%;
++}
+ 
++.product_list .timeline .start_input #s_time {
++    width: 30%;
++    border-radius: 5px;
++    border: 1px solid white;
++}
+ 
+-.searchBar{width: 100%;padding: 15px;box-sizing: border-box;text-align: center;}
+-.searchBar .input_div{width: 70%;float: left;}
+-.searchBar .input_div #product_name{width: 100%;height: 44px;}
+-.searchBar .btn_div{width: 30%;float: left;padding-left: 20px;box-sizing: border-box;}
+-.keyword_show{text-align: center;margin-top: 80px;margin-bottom: 30px;}
++.product_list .timeline .end_input {
++    float: left;
++    width: 50%;
++}
+ 
+-.modal-body{overflow-x: hidden;height:500px;}
++.product_list .timeline .end_input #e_time {
++    width: 30%;
++    border-radius: 5px;
++    border: 1px solid white;
++}
+ 
+-#final_btn{margin-top:20px;float:right;}
++.product_list .product_modify {
++    box-sizing: border-box;
++    text-align: right;
++}
+ 
+-#none_product td{text-align: center;padding-top: 30px;font-weight: bold;}
+-#p_title{padding-top: 20px;color: #696ffb;font-weight: 600;}
+\ No newline at end of file
++.product_list #modify_product {
++    background: #212121;
++    border: none;
++    color: white;
++    padding: 5px 10px;
++    border-radius: 3px;
++    margin-right: 5px;
++}
++
++.product_list #save_product {
++    display: none;
++    background: white;
++    border: none;
++    color: #212121;
++    padding: 5px 10px;
++    border: 1px solid #212121;
++    border-radius: 3px;
++}
++
++.product_list .table_btn,
++#final_btn {
++    background: #212121;
++    border: none;
++    color: white;
++    padding: 5px 10px;
++    border-radius: 3px;
++    margin-right: 5px;
++    width: 30%;
++    height: 41px;
++}
++
++#add_product_btn {
++    z-index: 9970;
++    box-shadow: 0px 1px 4px 3px grey;
++    width: 60px;
++    position: fixed;
++    bottom: 10%;
++    background: white;
++    border-radius: 100px;
++    height: 60px;
++    right: 30px;
++    border: 1px solid red;
++    cursor: pointer;
++}
++
++#final_btn {
++    width: 100%;
++    position: absolute;
++    bottom: 30px;
++    background: #766f6f;
++    left: 0px;
++}
++
++.meter {
++    height: 10px;  /* Can be anything */
++    position: relative;
++    background: #ede9e9;
++    -moz-border-radius: 25px;
++    -webkit-border-radius: 25px;
++    border-radius: 25px;
++    padding: 0px;
++    box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
++}
++
++
++.meter > span {
++    display: block;
++    height: 100%;
++    background-color: #ff7b7b;
++    /* background-image: linear-gradient(center bottom, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%);*/
++    float: left;
++    position: absolute;
++    top: 0px;
++    left: 38px;
++    overflow: hidden;
++}
+\ No newline at end of file

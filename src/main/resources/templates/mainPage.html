@@ -1,0 +1,590 @@
+<head>
+    <th:block th:include="/header2"></th:block>
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+
+    <!-- cookie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/shared/style.css">
+
+    <!-- prettytag -->
+    <script src="./js/prettytag.js"></script>
+    <link rel="stylesheet" href="./css/prettytag.css" />
+
+    <script src="./js/partners/mainPage.js"></script>
+    <link rel="stylesheet" href="./css/partners/mainPage.css" />
+
+</head>
+<style>
+    #product_name{width: 100%;height: 41px;border: 1px solid #e2e2e2;border-radius: 5px;margin-bottom:10px;}
+    #search_product_btn{width:100%;}
+</style>
+<!-- partial -->
+<div class="page-content-wrapper">
+    <div class="page-content-wrapper-inner">
+        <div class="content-viewport">
+            <!-- 팝업 -->
+            <!-- 팝업 -->
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productListPopup"> 팝업 </button>
+
+            <div class="modal fade" id="productListPopup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">상품 검색</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="item-wrapper">
+                                <div class="row mb-3">
+                                    <div class="searchPop col-md-10 mx-auto">
+                                        <div class="searchBar form-group row showcase_row_area">
+                                            <div class="col-md-9 showcase_text_area">
+                                                <input id="product_name" type="text" value="" placeholder="상품명을 입력하세요" />
+                                            </div>
+                                            <div class="col-md-3 showcase_content_area">
+                                                <button type="button" class="btn btn-secondary" id="search_product_btn">검색</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-12 showcase_text_area">
+                                                <div class="keyword_show" style="display:none;"><b style="color:#e70012;">"<span id="s_keyword"></span>"</b>의 결과입니다.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-12 showcase_text_area">
+                                                <div id="p_info_list">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary">등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!--&lt;!&ndash; Button trigger modal &ndash;&gt;
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"> Launch static backdrop modal </button>
+            &lt;!&ndash; Modal &ndash;&gt;
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">비디오 수정</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="item-wrapper">
+                                <div class="row mb-3">
+                                    <div class="col-md-8 mx-auto">
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="m_video_name">비디오 이름</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="text" class="form-control" id="m_video_name" value="비디오 이름">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType12">Email</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="email" class="form-control" id="inputType2" value="asfabiv@rud.eu">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType13">Password</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="password" class="form-control" id="inputType3" value="00000000"> </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType1">Number</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="number" class="form-control" id="inputType4" value="83393922">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType5">Disabled</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="text" class="form-control" id="inputType5" value="Hulda Stevenson" disabled="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType7">Placeholder</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="text" class="form-control" id="inputType7" placeholder="Placeholder Text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType8">Read-only</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <input type="text" class="form-control" id="inputType8" readonly="readonly" value="Hulda Stevenson">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row showcase_row_area">
+                                            <div class="col-md-3 showcase_text_area">
+                                                <label for="inputType9">Textarea</label>
+                                            </div>
+                                            <div class="col-md-9 showcase_content_area">
+                                                <textarea class="form-control" id="inputType9" cols="12" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-12 py-5">
+                    <h4>홈</h4>
+                    <p class="text-gray">Welcome v-link, <span id="partners_name"></span></p>
+                </div>
+            </div>
+            <div class="row">
+               <!-- <div class="col-lg-3 col-md-12 equel-grid">
+                    <div class="grid widget-revenue-card">
+                        <div class="grid-body d-flex flex-column h-100" style='padding:20px 15px;'>
+                            <div class="split-header">
+                                <p class="card-title">BEST 댓글 영상</p>
+                            </div>
+                            <div class="vertical-timeline-wrapper" style='width:100%;'>
+                                <div class="col-lg-12 col-md-12 col-sm-12 equel-grid">
+                                    <div class="grid">
+                                        <div class="grid-body" style="padding:10px;">
+                                            <div class="split-header">
+                                                <div class="img" style="position:relative;">
+                                                    <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-end mt-2">
+                                                <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                            </div>
+                                            <div class="d-flex mt-2">
+                                                <div class="wrapper d-flex pr-4">
+                                                    <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                    <small class="text-gray">73,000</small>
+                                                </div>
+                                                <div class="wrapper d-flex pr-4">
+                                                    <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                    <small class="text-gray">73,000</small>
+                                                </div>
+                                                <div class="wrapper d-flex">
+                                                    <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                    <small class="text-gray"> 73,000</small>
+                                                </div>
+                                            </div>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <div class="grouped-images mt-2">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                <span class="plus-text img-sm">+3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 equel-grid">
+                                    <div class="grid">
+                                        <div class="grid-body" style="padding:10px;">
+                                            <div class="split-header">
+                                                <div class="img" style="position:relative;">
+                                                    <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-end mt-2">
+                                                <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                            </div>
+                                            <div class="d-flex mt-2">
+                                                <div class="wrapper d-flex pr-4">
+                                                    <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                    <small class="text-gray">73,000</small>
+                                                </div>
+                                                <div class="wrapper d-flex pr-4">
+                                                    <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                    <small class="text-gray">73,000</small>
+                                                </div>
+                                                <div class="wrapper d-flex">
+                                                    <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                    <small class="text-gray"> 73,000</small>
+                                                </div>
+                                            </div>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <span class="text-primary ml-1">#Slack</span>
+                                            <div class="grouped-images mt-2">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                <span class="plus-text img-sm">+3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="col-md-4 equel-grid">
+                    <div class="grid">
+                        <div class="grid-body py-3">
+                            <p class="card-title ml-n1">상품 리스트</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                <thead>
+                                <tr class="solid-header">
+                                    <th colspan="2" class="pl-4">상품정보</th>
+                                    <th>상세보기</th>
+                                </tr>
+                                </thead>
+                                <tbody id="product_list">
+                                <!--    <tr>
+                                        <td class="pr-0 pl-4">
+                                            <img class="profile-img img-sm" src="https://contents.lotteon.com/itemimage/_v181422/LO/13/96/19/60/32/_1/39/61/96/03/3/LO1396196032_1396196033_1.jpg/dims/resizef/554X554" alt="profile image">
+                                        </td>
+                                        <td class="pl-md-0">
+                                            <small class="product_name text-black font-weight-medium d-block">농심 신라면 5봉+짜파게티5봉+안성탕면5봉+너구리5봉</small>
+                                            <span class="text-gray">
+                              <span class="status-indicator rounded-indicator small bg-primary"></span>14,730원 </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary">보기</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-0 pl-4">
+                                            <img class="profile-img img-sm" src="https://contents.lotteon.com/itemimage/_v181422/LO/13/96/19/60/32/_1/39/61/96/03/3/LO1396196032_1396196033_1.jpg/dims/resizef/554X554" alt="profile image">
+                                        </td>
+                                        <td class="pl-md-0">
+                                            <small class="product_name text-black font-weight-medium d-block">농심 신라면 5봉+짜파게티5봉+안성탕면5봉+너구리5봉</small>
+                                            <span class="text-gray">
+                              <span class="status-indicator rounded-indicator small bg-primary"></span>14,730원 </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary">보기</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-0 pl-4">
+                                            <img class="profile-img img-sm" src="https://contents.lotteon.com/itemimage/_v181422/LO/13/96/19/60/32/_1/39/61/96/03/3/LO1396196032_1396196033_1.jpg/dims/resizef/554X554" alt="profile image">
+                                        </td>
+                                        <td class="pl-md-0">
+                                            <small class="product_name text-black font-weight-medium d-block">농심 신라면 5봉+짜파게티5봉+안성탕면5봉+너구리5봉</small>
+                                            <span class="text-gray">
+                              <span class="status-indicator rounded-indicator small bg-primary"></span>14,730원 </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary">보기</button>
+                                        </td>
+                                    </tr>
+   -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 equel-grid">
+                    <div class="grid widget-revenue-card">
+                        <div class="grid-body d-flex flex-column h-100">
+                            <div class="split-header">
+                                <p class="card-title">통계</p>
+                            </div>
+                            <div class="sta">
+                                <div class="sta_list col-lg-6 col-md-12 equel-grid">
+                                    <div class="grid widget-revenue-card">
+                                        <div class="grid-body d-flex flex-column h-100">
+                                            <div class="split-header">
+                                                <p class="card-title">지역</p>
+                                            </div>
+                                            <canvas class="chartjs-render-monitor" id="myChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sta_list col-lg-6 col-md-12 equel-grid">
+                                    <div class="grid widget-revenue-card">
+                                        <div class="grid-body d-flex flex-column h-100">
+                                            <div class="split-header">
+                                                <p class="card-title">성별</p>
+                                            </div>
+                                            <canvas class="chartjs-render-monitor" id="myChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sta_list col-lg-6 col-md-12 equel-grid">
+                                    <div class="grid widget-revenue-card">
+                                        <div class="grid-body d-flex flex-column h-100">
+                                            <div class="split-header">
+                                                <p class="card-title">나이</p>
+                                            </div>
+                                            <canvas class="chartjs-render-monitor" id="myChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sta_list col-lg-6 col-md-12 equel-grid">
+                                    <div class="grid widget-revenue-card">
+                                        <div class="grid-body d-flex flex-column h-100">
+                                            <div class="split-header">
+                                                <p class="card-title">통계3</p>
+                                            </div>
+                                            <canvas class="chartjs-render-monitor" id="myChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-md-8 equel-grid">
+                    <div class="grid">
+                        <div class="grid-body">
+                            <div class="split-header">
+                                <p class="card-title">영상</p>
+                                <div class="btn-group">
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Expand View</a>
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="top_box">
+                                <div class="vertical-timeline-wrapper">
+                                    &lt;!&ndash; <div class="col-lg-6 col-md-12 col-sm-12 equel-grid">
+                                         <div class="grid">
+                                             <div class="grid-body">
+                                                 <div class="split-header">
+                                                     <div class="img" style="position:relative;">
+                                                         <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                     </div>
+                                                 </div>
+                                                 <div class="d-flex align-items-end mt-2">
+                                                     <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                                 </div>
+                                                 <div class="d-flex mt-2">
+                                                     <div class="wrapper d-flex pr-4">
+                                                         <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                         <small class="text-gray">73,000</small>
+                                                     </div>
+                                                     <div class="wrapper d-flex pr-4">
+                                                         <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                         <small class="text-gray">73,000</small>
+                                                     </div>
+                                                     <div class="wrapper d-flex">
+                                                         <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                         <small class="text-gray"> 73,000</small>
+                                                     </div>
+                                                 </div>
+                                                 <div class="d-flex flex-row mt-4 mb-4">
+                                                     <button class="btn btn-outline-light text-gray component-flat w-50 mr-2" type="button">수정</button>
+                                                     <button class="btn btn-primary w-50 ml-2" type="button">삭제</button>
+                                                 </div>
+                                                 2020-08-10
+                                                 <span class="text-primary ml-1">#Slack</span>
+                                                 <span class="text-primary ml-1">#Slack</span>
+                                                 <span class="text-primary ml-1">#Slack</span>
+                                                 <div class="grouped-images mt-2">
+                                                     <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                     <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                     <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                     <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                     <span class="plus-text img-sm">+3</span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 equel-grid">
+                                        <div class="grid">
+                                            <div class="grid-body">
+                                                <div class="split-header">
+                                                    <div class="img" style="position:relative;">
+                                                        <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end mt-2">
+                                                    <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                                </div>
+                                                <div class="d-flex mt-2">
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                        <small class="text-gray"> 73,000</small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row mt-4 mb-4">
+                                                    <button class="btn btn-outline-light text-gray component-flat w-50 mr-2" type="button">수정</button>
+                                                    <button class="btn btn-primary w-50 ml-2" type="button">삭제</button>
+                                                </div>
+                                                2020-08-10
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <div class="grouped-images mt-2">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                    <span class="plus-text img-sm">+3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 equel-grid">
+                                        <div class="grid">
+                                            <div class="grid-body">
+                                                <div class="split-header">
+                                                    <div class="img" style="position:relative;">
+                                                        <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end mt-2">
+                                                    <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                                </div>
+                                                <div class="d-flex mt-2">
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                        <small class="text-gray"> 73,000</small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row mt-4 mb-4">
+                                                    <button class="btn btn-outline-light text-gray component-flat w-50 mr-2" type="button">수정</button>
+                                                    <button class="btn btn-primary w-50 ml-2" type="button">삭제</button>
+                                                </div>
+                                                2020-08-10
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <div class="grouped-images mt-2">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                    <span class="plus-text img-sm">+3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 equel-grid">
+                                        <div class="grid">
+                                            <div class="grid-body">
+                                                <div class="split-header">
+                                                    <div class="img" style="position:relative;">
+                                                        <img src="https://img1.daumcdn.net/kakaotv/KAKAOACCOUNT/1507628941/thumb/20190205155108" style="width:100%;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end mt-2">
+                                                    <h6>[펜트하우스]비둘기의 등장에 뒤집어진 현장</h6>
+                                                </div>
+                                                <div class="d-flex mt-2">
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-success font-weight-medium mr-2"> <i class="far fa-file-video"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex pr-4">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="far fa-heart"></i></small>
+                                                        <small class="text-gray">73,000</small>
+                                                    </div>
+                                                    <div class="wrapper d-flex">
+                                                        <small class="text-primary font-weight-medium mr-2"><i class="fas fa-eye"></i></small>
+                                                        <small class="text-gray"> 73,000</small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row mt-4 mb-4">
+                                                    <button class="btn btn-outline-light text-gray component-flat w-50 mr-2" type="button">수정</button>
+                                                    <button class="btn btn-primary w-50 ml-2" type="button">삭제</button>
+                                                </div>
+                                                2020-08-10
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <span class="text-primary ml-1">#Slack</span>
+                                                <div class="grouped-images mt-2">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_4.png" alt="Profile Image" data-toggle="tooltip" title="Gerald Pierce">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_5.png" alt="Profile Image" data-toggle="tooltip" title="Edward Wilson">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/female/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Billy Williams">
+                                                    <img class="img-sm" src="http://jjeun.com/v-link/assets/images/profile/male/image_6.png" alt="Profile Image" data-toggle="tooltip" title="Lelia Hampton">
+                                                    <span class="plus-text img-sm">+3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>&ndash;&gt;
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="col-md-12 equel-grid">
+                    <div id="top_box_list">
+                        <div class="col-12 py-5">
+                            <h5>인기 비디오</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- content viewport ends -->
+    <!-- partial:partials/_footer.html -->
+
+    <!-- partial -->
+</div>
+<!-- page content ends -->
+</div>
+<!--page body ends -->
+<!-- SCRIPT LOADING START FORM HERE /////////////-->
+<!-- plugins:js -->
+
+<!-- endinject -->
+<!-- Vendor Js For This Page Ends-->
+<script src="./js/partners/assets/apexcharts.min.js"></script>
+<script src="./js/partners/assets/Chart.min.js"></script>
+<script src="./js/partners/assets/chartjs.addon.js"></script>
+<!-- Vendor Js For This Page Ends-->
+<!-- build:js -->
+<script src="./js/partners/assets/template.js"></script>
+<script src="./js/partners/assets/dashboard.js"></script>
+<!-- endbuild -->
+</body>
+</html>

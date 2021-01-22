@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>V-link</title>
+    <link rel="icon" href="/img/round_logo.png">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/vendors/iconfonts/mdi/css/materialdesignicons.css">
+    <!-- endinject -->
+    <!-- vendor css for this page -->
+    <!-- End vendor css for this page -->
+    <!-- inject:css -->
+    <!-- dropzone-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/basic.css"></script>
+
+    <!-- plyr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.css" />
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.min.js"></script>
+    <script src="./js/plyr-plugin-capture.js"></script>
+    <script src="./js/fabric.js"></script>
+    <script src="./js/fabric.min.js"></script>
+
+    <!-- prettytag -->
+    <script src="./js/prettytag.js"></script>
+    <link rel="stylesheet" href="./css/prettytag.css" />
+
+    <!--  alert  -->
+    <script src="./js/toastr.min.js"></script>
+    <link rel="stylesheet" href="./css/toastr.min.css" />
+    <script src="./js/toastr.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+    <!-- chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- cookie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout style -->
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/demo_1/style.css">
+    <!-- Layout style -->
+    <link rel="shortcut icon" href="http://jjeun.com/v-link/assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./css/admin/admin_list.css" />
+</head>
+
+<body>
+<div class="authentication-theme auth-style_1">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">파트너스 정보</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="item-wrapper">
+                        <div class="row mb-4">
+                            <div class="col-md-10 mx-auto">
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_id">프로필</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <div class="user-profile">
+                                            <div class="display-avatar animated-avatar">
+                                                <img class="profile-img img-lg rounded-circle" id="pa_info_img" src="" alt="profile image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_id">id</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <input type="text" class="form-control" id="pa_id" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_email">이메일</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <input type="text" class="form-control" id="pa_email" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_name">이름</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <input type="text" class="form-control" id="pa_name" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_id">페이스북</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <input type="text" class="form-control" id="sns1" readonly="readonly" value="" placeholder="페이스북 url">
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area">
+                                    <div class="col-md-2 showcase_text_area">
+                                        <label for="pa_id">네이버 블로그</label>
+                                    </div>
+                                    <div class="col-md-10 showcase_content_area">
+                                        <input type="text" class="form-control" id="blog1" readonly="readonly" value="" placeholder="네이버 블로그 url">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 logo-section">
+            <a href="./" class="logo">
+                <img class="logo" src="./img/logo.png" alt="">
+            </a>
+            <div id="admin_title">파트너스 승인</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-11 mx-auto">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mx-auto form-wrapper">
+                            <div class="auth_btn_box">
+                                <a href="./admin-list">
+                                    <button class="btn btn-outline-light text-gray component-flat w-40 mr-2" >파트너스 리스트 페이지 이동</button>
+                                </a>
+                            </div>
+                            <div class="grid table-responsive">
+                                <table class="table table-stretched">
+                                    <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>이메일</th>
+                                        <th>정보조회</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="show_admin_list">
+                                  <!--  <tr>
+                                        <td>
+                                            <p class="mb-n1 font-weight-medium">1</p>
+                                        </td>
+                                        <td class="font-weight-medium">5fd71601cf32b75e58a1b872</td>
+                                        <td class="font-weight-medium">
+                                            <div style="margin-top:10px;">
+                                                <button class="btn btn-outline-light text-gray component-flat w-40 mr-2" data-toggle="modal" data-target="#myModal" onclick="show_partners('5fd71601cf32b75e58a1b872')">보기</button>
+                                                <button class="btn btn-primary w-40 ml-2" onclick="ap_partners('5fd71601cf32b75e58a1b872')">승인</button>
+                            </div>
+                            </td>
+                            </tr>-->
+
+                            </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="auth_footer">
+    <p class="text-muted text-center">© V-link Inc 2020</p>
+</div>
+</div>
+
+<script src="./js/admin/admin_ap.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+#dropzone{border:none;}
+.user-profile{position: relative;}
+#profile_dropzone{border: none;background: #e2e2e2;padding: 4px 6px;position: absolute;border-radius: 5px;bottom: 119px;right: 40px;z-index: 9990;}
+.navigation-menu i{margin-right:10px;}
+.navigation-menu li a span{text-align: left;}
+.sidebar .user-profile .ct{width:40px;}

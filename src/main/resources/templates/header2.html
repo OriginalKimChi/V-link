@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>V-link</title>
+    <link rel="icon" href="/img/round_logo.png">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/vendors/iconfonts/mdi/css/materialdesignicons.css">
+    <!-- endinject -->
+    <!-- vendor css for this page -->
+    <!-- End vendor css for this page -->
+    <!-- inject:css -->
+    <!-- dropzone-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/basic.css"/>-->
+    <!-- plyr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.css" />
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.5.4/dist/plyr.min.js"></script>
+    <script src="./js/plyr-plugin-capture.js"></script>
+    <script src="./js/fabric.js"></script>
+    <script src="./js/fabric.min.js"></script>
+
+    <!-- prettytag -->
+    <script src="./js/prettytag.js"></script>
+    <link rel="stylesheet" href="./css/prettytag.css" />
+
+    <!--  alert  -->
+    <script src="./js/toastr.min.js"></script>
+    <link rel="stylesheet" href="./css/toastr.min.css" />
+    <script src="./js/toastr.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+
+    <!-- chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+    <!-- cookie -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/shared/style.css">
+
+
+    <!-- endinject -->
+    <!-- Layout style -->
+    <link rel="stylesheet" href="http://jjeun.com/v-link/assets/css/demo_1/style.css">
+    <!-- Layout style -->
+    <link rel="shortcut icon" href="http://jjeun.com/v-link/assets/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="./css/partners/header2.css" />
+
+</head>
+<style>
+    .sidebar .navigation-menu{position: fixed;margin-top:268px;}
+    .sidebar .user-profile{position:fixed;}
+    #menu_title{
+        top: 64px;
+        display: block;
+        background: #fff;
+        margin: 15px 0px 0px 0px;
+        padding: 20px 30px 10px 30px;
+        font-size: 10px;
+        color: rgba(16, 16, 16, 0.4);
+        z-index: 1;
+        font-weight: 500;}
+</style>
+<body class="header-fixed">
+<!-- partial:partials/_header.html -->
+<nav class="t-header">
+    <div class="t-header-brand-wrapper">
+        <a href="./">
+            <img class="logo" src="./img/logo.png" alt="">
+            <img class="logo-mini" src="/img/round_logo.png" alt="">
+        </a>
+    </div>
+    <div class="t-header-content-wrapper">
+        <div class="t-header-content">
+            <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
+                <i class="fas fa-bars"></i>
+            </button>
+           <!-- <form action="#" class="t-header-search-box">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>-->
+        </div>
+    </div>
+</nav>
+<!-- partial -->
+<div class="page-body">
+    <!-- partial:partials/_sidebar.html -->
+    <div class="sidebar">
+        <div class="user-profile">
+            <div class="img">
+
+
+                <div id="dropzone" class="dropzone_box3">
+                    <form action="/partners/update-profileImg" class="dropzone" id="partners_profile_img">
+                        <div class="dz-default dz-message"><button id="profile_dropzone" class="dz-button" type="button"><i class="fas fa-camera"></i></button></div>
+                    </form>
+                </div>
+            </div>
+            <div class="display-avatar animated-avatar">
+                <img id="profile_img" class="profile-img img-lg rounded-circle" src="./img/user1.png" alt="profile image">
+            </div>
+            <div class="info-wrapper">
+                <p class="user-name" id="header_partners_name">로그인 후 이용가능</p>
+                <h6 class="display-income" id="header_partners_email" style="width: 100%;height: 10px;"></h6>
+                <div class="d-flex mt-4">
+                    <div class="wrapper d-flex pl-4">
+                        <small class="text-success font-weight-medium mr-1"><i class="fas fa-users"></i></small>
+                        <small class="ct text-gray" id="header_total1"></small>
+                    </div>
+                   <!-- <div class="wrapper d-flex pl-4">
+                        <small class="text-primary font-weight-medium mr-1"><i class="fas fa-user-friends"></i></small>
+                        <small class="ct text-gray" id="header_total2">1,700</small>
+                    </div>
+                    <div class="wrapper d-flex pl-2">
+                        <small class="text-primary font-weight-medium mr-1"><i class="far fa-eye"></i></small>
+                        <small class="ct text-gray" id="header_total3"> 73,000</small>
+                    </div>-->
+                    <div class="wrapper d-flex pl-2">
+                        <small class="text-primary font-weight-medium mr-1"><i class="fas fa-sign-out-alt"></i></small>
+                        <small class="ct text-gray" id="header_logout" onclick="logout_ajax()" style="width: 80px;cursor:pointer;"> 로그아웃</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <ul class="navigation-menu">
+            <li id="menu_title">MENU</li>
+            <li class="home">
+                <a href="./main-page">
+                    <span class="link-title">홈</span>
+                    <i id="home_icon" class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="savedvideo">
+                <a href="./saved-video">
+                    <span class="link-title">비디오 관리</span>
+                    <i id="savedvideo_icon" class="far fa-play-circle"></i>
+                </a>
+            </li>
+            <li class="uploadvideo">
+                <a href="./video-upload">
+                    <span class="link-title">비디오 등록</span>
+                    <i id="uploadvideo_icon" class="fas fa-user-cog"></i>
+                </a>
+            </li>
+            <li class="contact">
+                <a href="./contact">
+                    <span class="link-title">문의하기</span>
+                    <i id="contact_icon" class="fas fa-envelope"></i>
+                </a>
+            </li>
+            <li class="pwd">
+                <a href="./re-Password">
+                    <span class="link-title">비밀번호 변경</span>
+                    <i id="repassword_icon" class="fas fa-key"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script src="./js/partners/header2.js"></script>

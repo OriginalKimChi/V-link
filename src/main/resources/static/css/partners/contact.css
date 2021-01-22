@@ -1,0 +1,11 @@
+#send_btn{float:right;margin-top:20px;}
+.form-group{margin-bottom: 35px;}
+.grid-header{font-size:20px;}
+.equel-grid .grid{padding-bottom: 40px;}
+
+#apply_title{text-align: center;font-size: 20px;margin-top: 20px;color:gray;}
+#send_btn{margin-top: 20px;background:#ea4347;border-color: #ea4347;}
+.custom-file-input:lang(en) ~ .custom-file-label::after{content:"추가"}
+.add_btn{width: 30%;float: right;margin-top: 10px;background: #f2ecec;color: #ea4347;border: none;}
+label{color:#ea4347;font-size: 15px;font-weight: 600;}
+label.sns_title{color:gray;font-size: 13px;font-weight: 400;}

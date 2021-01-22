@@ -1,0 +1,26 @@
+.sta_list{float:left;}
+.sta_list .sta{width:33.3%;float:left;margin-top:20px;}
+#profile .box div.icon{width:20%;float:left;margin-right:10px;}
+#follow_count,#total_count,#log_out{width:80%;float:left;}
+.product_name{text-overflow:ellipsis; overflow:hidden;white-space:nowrap;width: 150px;}
+.img-sm{width:30px;height:30px;}
+@media (min-width: 1200px) {
+    .vertical-timeline-wrapper {
+        float: left;
+        width: 50%;
+    }
+    .vertical-timeline-wrapper .col-lg-6{
+        float:left;
+    }
+}
+.top_box{float:left;}
+.top_box .count {width:100%;float:left;}
+.top_box .list{width:32%;float:left;text-align: center;margin:20px 0px;}
+.top_box .img_cover{width: 100%;height: 176px;background: black;text-align: center;overflow:hidden;}
+.top_box .img_cover .time{position: absolute;bottom: 0;right: 0;color: white;text-align: right;/* width: 100%; */}
+.top_box .img_cover span{color:white;background:black;}
+.top_box .img_cover img{width:100%;}
+.top_box h5{font-size:14px;margin-top:10px;}
+.top_box .card-title{margin:10px 0px;}
+.top_box .card-title i{margin-right:10px;font-size:20px;}
+.top_box .count .icon i{color:#696ffb;}
